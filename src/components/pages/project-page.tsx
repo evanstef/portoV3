@@ -30,7 +30,7 @@ export default function ProjectPage() {
   );
   return (
     <div ref={projectPage} className="space-y-4 xl:space-y-6">
-      <div className="space-y-4 border-b border-gray-900 pb-4 mb-4">
+      <div className="space-y-4 border-b border-gray-900 dark:border-gray-300 pb-4 mb-4">
         <h1 className="text-base sm:text-lg lg:text-2xl font-bold title-project">
           a lot experiment and projects are here
         </h1>

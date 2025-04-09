@@ -102,7 +102,7 @@ export default function GuestbookPage() {
 
   return (
     <div ref={guestbookPage}>
-      <div className="space-y-4 border-b border-gray-900 pb-4 mb-4">
+      <div className="space-y-4 border-b border-gray-900 dark:border-gray-300 pb-4 mb-4">
         <h1 className="text-base sm:text-lg lg:text-2xl font-bold title-guestbook">
           guestbook and leave a message...
         </h1>
@@ -131,7 +131,7 @@ export default function GuestbookPage() {
               type="button"
               onClick={handleSignIn}
               disabled={isLoading}
-              className={`flex items-center gap-2 border border-gray-900 p-2 rounded-md ${
+              className={`flex items-center gap-2 border border-gray-900 dark:border-gray-300 p-2 hover:bg-gray-900 dark:hover:bg-gray-300 duration-300 hover:text-gray-300 dark:hover:text-gray-900 ease-in-out rounded-md ${
                 isLoading
                   ? "opacity-80 cursor-not-allowed"
                   : "hover:cursor-pointer"
@@ -147,7 +147,7 @@ export default function GuestbookPage() {
 
       {/* input message */}
       {user && (
-        <div className="flex items-start gap-2 border-b border-gray-900 pb-4 mb-4 input-guestbook">
+        <div className="flex items-start gap-2 border-b border-gray-900 dark:border-gray-300 pb-4 mb-4 input-guestbook">
           <p className="text-xs sm:text-sm lg:text-base whitespace-nowrap mt-2">
             Message :
           </p>
@@ -158,7 +158,7 @@ export default function GuestbookPage() {
               <input
                 {...register("comment")}
                 type="text"
-                className="border border-gray-900 rounded-lg p-2 text-xs sm:text-sm w-full lg:text-base focus:outline-none"
+                className="border border-gray-900 dark:border-gray-300 rounded-lg p-2 text-xs sm:text-sm w-full lg:text-base focus:outline-none"
                 placeholder="Leave a message for Evan..."
                 autoComplete="off"
               />
@@ -171,7 +171,7 @@ export default function GuestbookPage() {
             <button
               type="submit"
               disabled={createCommentMutation.isPending}
-              className="flex items-center gap-2 bg-gray-900 p-2 rounded-md hover:cursor-pointer text-gray-300 whitespace-nowrap">
+              className="flex items-center gap-2 bg-gray-900 dark:bg-gray-300 p-2 rounded-md hover:cursor-pointer text-gray-300 dark:text-gray-900 whitespace-nowrap">
               {createCommentMutation.isPending ? (
                 <IconLoader3 className="animate-spin w-4 h-4 lg:w-6 lg:h-6" />
               ) : (

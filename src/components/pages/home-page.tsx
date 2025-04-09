@@ -93,7 +93,7 @@ export default function HomePage() {
   return (
     <div ref={containerAbout} className="space-y-4 xl:space-y-6">
       {/* Hero section  */}
-      <div className="flex justify-between items-center border-b border-gray-900 pb-4 gap-10 sm:gap-0">
+      <div className="flex justify-between items-center border-b border-gray-900 dark:border-gray-300 pb-4 gap-10 sm:gap-0">
         {/* Kata kata manis */}
         <div>
           <h1 className="text-xl sm:text-2xl lg:text-4xl font-bold nama-evan">
@@ -122,7 +122,7 @@ export default function HomePage() {
             <div className="text relative z-50">
               <h1
                 className={`font-bold text-[8px] sm:text-[10px] lg:text-xs relative text-center ${
-                  hovered ? "bg-gray-300" : "bg-black"
+                  hovered ? "bg-gray-300" : "bg-gray-900"
                 } p-1 rounded-xl`}>
                 {hovered ? "Im Hiding!!" : "Please Hover!!"}
               </h1>
@@ -132,7 +132,7 @@ export default function HomePage() {
       </div>
 
       {/* About Me */}
-      <div className="border-b border-black pb-4">
+      <div className="border-b border-gray-900 dark:border-gray-300 pb-4">
         <div className="flex items-center gap-2 little-peace">
           <h1 className="text-base sm:text-lg lg:text-2xl font-bold">
             a little peace of heaven
@@ -153,95 +153,95 @@ export default function HomePage() {
           modern designs that prioritize both creativity and user experience. I
           constantly push my limits to craft intuitive and aesthetically
           pleasing interfaces.On the back-end, I specialize in JavaScript and
-          PHP, working with frameworks like ExpressJS, NestJS, NodeJS, and
-          Laravel.
+          PHP, working with frameworks like NextJS, ExpressJS, NestJS, NodeJS,
+          and Laravel.
         </p>
       </div>
 
       {/* Skill Framework and programming language */}
-      <div className="space-y-4 border-b border-black pb-4">
+      <div className="space-y-4 border-b border-gray-900 dark:border-gray-300 pb-4 ">
         <div className="grid grid-cols-6 gap-x-8 gap-y-2 sm:grid-cols-8 md:grid-cols-10 sm:gap-x-12 md:gap-x-10 lg:grid-cols-11 xl:gap-10 skill-set">
           {/* Javascript */}
           <div>
             <LinkPreview url="https://www.javascript.com/">
-              <SiJavascript className="text-2xl sm:text-3xl duration-300 ease-in-out hover:scale-150 hover:text-yellow-400 hover:cursor-pointer" />
+              <SiJavascript className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-yellow-400 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* TypeScript */}
           <div>
             <LinkPreview url="https://www.typescriptlang.org/">
-              <SiTypescript className="text-2xl sm:text-3xl duration-300 ease-in-out hover:scale-150 hover:text-blue-600 hover:cursor-pointer" />
+              <SiTypescript className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-blue-600 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* php */}
           <div>
             <LinkPreview url="https://www.php.net/">
-              <SiPhp className="text-2xl sm:text-3xl duration-300 ease-in-out hover:scale-150 hover:text-purple-700 hover:cursor-pointer" />
+              <SiPhp className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-purple-700 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* Next JS */}
           <div>
             <LinkPreview url="https://nextjs.org/">
-              <SiNextdotjs className="text-2xl sm:text-3xl duration-300 ease-in-out hover:scale-150 hover:cursor-pointer" />
+              <SiNextdotjs className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* node js */}
           <div>
             <LinkPreview url="https://nodejs.org/en">
-              <SiNodedotjs className="text-2xl sm:text-3xl duration-300 ease-in-out hover:scale-150 hover:text-green-500 hover:cursor-pointer" />
+              <SiNodedotjs className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-green-500 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* nest js */}
           <div>
             <LinkPreview url="https://nestjs.com/">
-              <SiNestjs className="text-2xl sm:text-3xl duration-300 ease-in-out hover:scale-150 hover:text-red-500 hover:cursor-pointer" />
+              <SiNestjs className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-red-500 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* express js */}
           <div>
             <LinkPreview url="https://expressjs.com/">
-              <SiExpress className="text-2xl sm:text-3xl duration-300 ease-in-out hover:scale-150 hover:cursor-pointer" />
+              <SiExpress className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* laravel */}
           <div>
             <LinkPreview url="https://laravel.com/">
-              <SiLaravel className="text-2xl sm:text-3xl duration-300 ease-in-out hover:scale-150 hover:text-red-500 hover:cursor-pointer" />
+              <SiLaravel className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-red-500 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* prisma */}
           <div>
             <LinkPreview url="https://www.prisma.io/">
-              <SiPrisma className="text-2xl sm:text-3xl duration-300 ease-in-out hover:scale-150 hover:text-green-400 hover:cursor-pointer" />
+              <SiPrisma className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-green-400 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* mongodb */}
           <div>
             <LinkPreview url="https://www.mongodb.com/">
-              <SiMongodb className="text-2xl sm:text-3xl duration-300 ease-in-out hover:scale-150 hover:text-green-500 hover:cursor-pointer" />
+              <SiMongodb className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-green-500 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* mysql */}
           <div>
             <LinkPreview url="https://www.mysql.com/">
-              <SiMysql className="text-2xl sm:text-3xl duration-300 ease-in-out hover:scale-150 hover:text-yellow-500 hover:cursor-pointer" />
+              <SiMysql className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-yellow-500 hover:cursor-pointer" />
             </LinkPreview>
           </div>
         </div>
       </div>
 
       {/* Exprerience */}
-      <div className="space-y-4 border-b border-black pb-4">
+      <div className="space-y-4 border-b border-gray-900 dark:border-gray-300 pb-4">
         <h1 className="text-base sm:text-lg lg:text-2xl font-bold experience-title">
           Experience
         </h1>

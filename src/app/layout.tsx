@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar";
 import ContainerLayout from "@/components/container-layout";
 import Footer from "@/components/footer";
 import TrailingCursor from "@/components/trail-cursor";
+import ModeButton from "@/components/mode-button";
 
 const pixelify = Geist_Mono({
   subsets: ["latin"],
@@ -24,11 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${pixelify.className} antialiased bg-gray-300 text-gray-900`}>
+        className={`${pixelify.className} antialiased bg-gray-300 text-gray-900 dark:bg-gray-900 dark:text-gray-300`}>
         <ContainerLayout>
           <Navbar />
+          <ModeButton />
           <main className="flex-grow">{children}</main>
           <Footer />
         </ContainerLayout>

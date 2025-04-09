@@ -42,7 +42,7 @@ export default function CommentList() {
 
   if (!comments || comments.length === 0) {
     return (
-      <div className="flex items-center justify-center mt-4 text-sm font-bold text-gray-500">
+      <div className="flex items-center justify-center mt-4">
         <Image
           src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzZoaWx4bzZ0OG9nenEwZ3dxb3JraTRzaTZwb25ha3hoYTY4bXlsciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4yPqi6aqoARYEcRkoY/giphy.gif"
           alt="empty"
@@ -58,7 +58,7 @@ export default function CommentList() {
       {comments?.map((comment: GetComment) => (
         <div
           key={comment.id}
-          className="flex items-center justify-between gap-2 border border-gray-900 p-2 rounded-md">
+          className="flex items-center justify-between gap-4 border border-gray-900 dark:border-gray-300 p-2 rounded-md">
           {/* nama dan komentar */}
           <div className="flex items-center gap-2">
             {/* gambar */}

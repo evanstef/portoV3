@@ -51,7 +51,7 @@ export const HoverEffect = ({
           <AnimatePresence>
             {hoveredIndex === idx && (
               <motion.span
-                className="absolute inset-0 h-full w-full block bg-gray-900/60 rounded-3xl"
+                className="absolute inset-0 h-full w-full block bg-gray-900/60 dark:bg-gray-300/60 rounded-3xl"
                 layoutId="hoverBackground"
                 initial={{ opacity: 0 }}
                 animate={{
@@ -80,20 +80,27 @@ export const HoverEffect = ({
                 {item.tech && (
                   <div className="flex gap-3 my-3">
                     {item.tech.map((Icon, idx) => (
-                      <Icon key={idx} className="text-2xl text-gray-300" />
+                      <Icon
+                        key={idx}
+                        className="text-2xl text-gray-300 dark:text-gray-900"
+                      />
                     ))}
                   </div>
                 )}
                 {/* link source code and project */}
-                <div className="flex items-center gap-3 text-gray-900">
+                <div className="flex items-center gap-3 text-gray-900 dark:text-gray-300">
                   {/* github */}
                   <Link
                     href={item.source}
                     target="_blank"
-                    className="bg-gray-300 p-1 rounded-sm hover:cursor-pointer">
+                    className="bg-gray-300 dark:bg-gray-900 p-1 rounded-sm hover:cursor-pointer">
                     <div className="flex items-center gap-1">
                       <SiGithub className="text-lg" />
-                      <h1 className="text-xs">Source</h1>
+                      <h1 className="text-xs">
+                        {item.title === "API Books"
+                          ? "Documentation"
+                          : "Source"}
+                      </h1>
                     </div>
                   </Link>
 
@@ -105,15 +112,17 @@ export const HoverEffect = ({
                       <h1 className="text-xs">Maintenance</h1>
                     </button>
                   ) : (
-                    <Link
-                      href={item.link}
-                      target="_blank"
-                      className="bg-gray-300 p-1 rounded-sm hover:cursor-pointer">
-                      <div className="flex items-center gap-1">
-                        <SiGooglechrome className="text-lg" />
-                        <h1 className="text-xs">Preview</h1>
-                      </div>
-                    </Link>
+                    item.title !== "API Books" && (
+                      <Link
+                        href={item.link}
+                        target="_blank"
+                        className="bg-gray-300 dark:bg-gray-900 p-1 rounded-sm hover:cursor-pointer">
+                        <div className="flex items-center gap-1">
+                          <SiGooglechrome className="text-lg" />
+                          <h1 className="text-xs">Preview</h1>
+                        </div>
+                      </Link>
+                    )
                   )}
                 </div>
               </div>
@@ -135,7 +144,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "rounded-xl h-full w-full overflow-hidden bg-gray-900 relative z-20",
+        "rounded-xl h-full w-full overflow-hidden bg-gray-900 dark:bg-gray-300 relative z-20",
         className
       )}>
       <div className="relative z-50">{children}</div>
@@ -150,7 +159,11 @@ export const CardTitle = ({
   children: React.ReactNode;
 }) => {
   return (
-    <h4 className={cn("text-gray-300 font-bold tracking-wide", className)}>
+    <h4
+      className={cn(
+        "text-gray-300 dark:text-gray-900 font-bold tracking-wide",
+        className
+      )}>
       {children}
     </h4>
   );
@@ -163,7 +176,11 @@ export const CardDescription = ({
   children: React.ReactNode;
 }) => {
   return (
-    <p className={cn("text-gray-300 leading-relaxed text-xs", className)}>
+    <p
+      className={cn(
+        "text-gray-300 dark:text-gray-900 leading-relaxed text-xs",
+        className
+      )}>
       {children}
     </p>
   );

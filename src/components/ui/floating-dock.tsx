@@ -96,7 +96,7 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto flex h-[60px] gap-4 items-end rounded-md bg-gray-300 border border-black px-3 pb-3",
+        "mx-auto flex h-[60px] gap-4 items-end rounded-md bg-gray-300 dark:bg-gray-900 border border-gray-900 dark:border-gray-300 px-3 pb-3",
         className
       )}>
       {items.map((item) => (
@@ -166,9 +166,13 @@ function IconContainer({
   const [hovered, setHovered] = useState(false);
 
   // Determine background color based on active state
-  const bgColor = isActive ? "bg-white" : "bg-gray-900";
+  const bgColor = isActive
+    ? "bg-white dark:bg-black"
+    : "bg-gray-900 dark:bg-gray-300";
   // Determine icon color based on active state
-  const iconColorClass = isActive ? "text-gray-900" : "text-gray-300";
+  const iconColorClass = isActive
+    ? "text-gray-900 dark:text-gray-300"
+    : "text-gray-300 dark:text-gray-900";
 
   return (
     <Link href={href}>
@@ -184,7 +188,7 @@ function IconContainer({
               initial={{ opacity: 0, y: 10, x: "-50%" }}
               animate={{ opacity: 1, y: 0, x: "-50%" }}
               exit={{ opacity: 0, y: 2, x: "-50%" }}
-              className="px-2 py-0.5 whitespace-pre rounded-md bg-gray-900 text-gray-300 absolute left-1/2 -translate-x-1/2 -top-6 w-fit text-xs">
+              className="px-2 py-0.5 whitespace-pre rounded-md bg-gray-900 text-gray-300 dark:bg-gray-300 dark:text-gray-900 absolute left-1/2 -translate-x-1/2 -top-6 w-fit text-xs">
               {title}
             </motion.div>
           )}
