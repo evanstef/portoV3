@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
@@ -94,7 +95,7 @@ export const LinkPreview = ({
       <HoverCardPrimitive.Root
         openDelay={50}
         closeDelay={100}
-        onOpenChange={(open: any) => {
+        onOpenChange={(open: boolean) => {
           setOpen(open);
         }}>
         <HoverCardPrimitive.Trigger
