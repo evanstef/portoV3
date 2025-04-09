@@ -38,7 +38,7 @@ export const HoverEffect = ({
     });
   });
 
-  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <div className={cn("grid grid-cols-1 sm:grid-cols-2 py-5", className)}>
