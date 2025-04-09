@@ -1,6 +1,6 @@
 import { DefaultUser, NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import db from "@/lib/db";
+import { db } from "@/lib/db";
 
 declare module "next-auth" {
   interface Session {
