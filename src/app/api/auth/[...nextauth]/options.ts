@@ -75,6 +75,7 @@ export const options: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     error: "/auth/error", // Error code passed in query string as ?error=
   },
