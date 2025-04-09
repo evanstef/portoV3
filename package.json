@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build && prisma generate",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --ext .ts,.tsx --ignore-pattern '.prisma'"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -49,5 +49,11 @@
     "tailwindcss": "^4",
     "tsx": "^4.19.3",
     "typescript": "^5"
+  },
+  "eslintConfig": {
+    "ignorePatterns": [
+      ".prisma",
+      "prisma/client"
+    ]
   }
 }

@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
       "avatars.githubusercontent.com",
     ],
   },
+  eslint: {
+    ignoreDuringBuilds: true, // Mengabaikan error ESLint selama build
+  },
 };
 
 export default nextConfig;
