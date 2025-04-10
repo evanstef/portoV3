@@ -58,9 +58,9 @@ export default function CommentList() {
       {comments?.map((comment: GetComment) => (
         <div
           key={comment.id}
-          className="flex items-center justify-between gap-4 border border-gray-900 dark:border-gray-300 p-2 rounded-md">
+          className="flex items-center justify-between border border-gray-900 dark:border-gray-300 p-2 rounded-md">
           {/* nama dan komentar */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-[80%]">
             {/* gambar */}
             <Image
               src={comment.user.avatar}
@@ -80,14 +80,15 @@ export default function CommentList() {
           </div>
 
           {/* tanggal dan jam */}
-          <div className="text-[10px] lg:text-xs">
+          <div className="text-[10px] lg:text-xs flex flex-col items-end w-[20%] justify-center">
             <p>
               {new Date(comment.createdAt).toLocaleDateString("id-ID", {
                 day: "numeric",
                 month: "short",
                 year: "numeric",
               })}
-              {","}
+            </p>
+            <p>
               {new Date(comment.createdAt).toLocaleTimeString("id-ID", {
                 hour: "2-digit",
                 minute: "2-digit",
