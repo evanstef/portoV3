@@ -164,21 +164,21 @@ export default function HomePage() {
           {/* Javascript */}
           <div>
             <LinkPreview url="https://www.javascript.com/">
-              <SiJavascript className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-yellow-400 hover:cursor-pointer" />
+              <SiJavascript className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-yellow-400 dark:hover:text-yellow-400 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* TypeScript */}
           <div>
             <LinkPreview url="https://www.typescriptlang.org/">
-              <SiTypescript className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-blue-600 hover:cursor-pointer" />
+              <SiTypescript className="text-2xl sm:text-3xl duration-300 ease-in-out dark:hover:text-blue-600 text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-blue-600 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* php */}
           <div>
             <LinkPreview url="https://www.php.net/">
-              <SiPhp className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-purple-700 hover:cursor-pointer" />
+              <SiPhp className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-purple-700 dark:hover:text-purple-700 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
@@ -192,14 +192,14 @@ export default function HomePage() {
           {/* node js */}
           <div>
             <LinkPreview url="https://nodejs.org/en">
-              <SiNodedotjs className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-green-500 hover:cursor-pointer" />
+              <SiNodedotjs className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-green-500 dark:hover:text-green-500 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* nest js */}
           <div>
             <LinkPreview url="https://nestjs.com/">
-              <SiNestjs className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-red-500 hover:cursor-pointer" />
+              <SiNestjs className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:hover:text-red-500 dark:text-gray-300 hover:scale-150 hover:text-red-500 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
@@ -213,28 +213,28 @@ export default function HomePage() {
           {/* laravel */}
           <div>
             <LinkPreview url="https://laravel.com/">
-              <SiLaravel className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-red-500 hover:cursor-pointer" />
+              <SiLaravel className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-red-500 dark:hover:text-red-500 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* prisma */}
           <div>
             <LinkPreview url="https://www.prisma.io/">
-              <SiPrisma className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-green-400 hover:cursor-pointer" />
+              <SiPrisma className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-green-400 dark:hover:text-green-400 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* mongodb */}
           <div>
             <LinkPreview url="https://www.mongodb.com/">
-              <SiMongodb className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-green-500 hover:cursor-pointer" />
+              <SiMongodb className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-green-500 dark:hover:text-green-500 hover:cursor-pointer" />
             </LinkPreview>
           </div>
 
           {/* mysql */}
           <div>
             <LinkPreview url="https://www.mysql.com/">
-              <SiMysql className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-yellow-500 hover:cursor-pointer" />
+              <SiMysql className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-yellow-500 dark:hover:text-yellow-500 hover:cursor-pointer" />
             </LinkPreview>
           </div>
         </div>

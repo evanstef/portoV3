@@ -4,6 +4,7 @@ import enam from "../../public/project-enam.png";
 import tujuh from "../../public/project-tujuh.png";
 import sepuluh from "../../public/project-sepuluh.png";
 import netflix from "../../public/Screenshot 2024-06-12 085200.png";
+import spill from "../../public/spill-post.png";
 import {
   SiFramer,
   SiNextdotjs,
@@ -18,18 +19,49 @@ import {
   SiAxios,
   SiSupabase,
   SiDaisyui,
+  SiLaravel,
+  SiAlpinedotjs,
+  SiJavascript,
+  SiPhp,
 } from "react-icons/si";
 
 export const data = [
   {
-    id: 9,
-    title: "Animation 3D Model Web",
-    image: sembilan,
+    id: 10,
+    title: "Spill Post",
+    image: spill,
     description:
-      "mengimplementasikan desain web 3D yang sudah saya pelajari hanya untuk sekedar latihan saja cara membuat web 3D jadi mungkin kedepannya saya akan membuat website yang ada unsur 3D saya menggunakkan webstie skectfab.com untuk mencari asset 3D model yang saya mau kendala saat membuat website ini adalah setup webgi yang agak rumit, namun saya ada kendala di bagian preview mode sehingga user bisa merotate 3d model tersebut pada saat di development masih berjalan lancar namun setelah naik ke production user tidak bisa merotate 3d model tersebut jadi, untuk sementara saya masih menonaktifkan fitur tersebut. dan mencoba debugging terlebih dahulu",
-    link: "https://vortex-gt-8.vercel.app/",
-    source: "https://github.com/evanstef/Animation-Web-3D",
-    tech: [SiNextdotjs, SiTailwindcss, SiFramer, SiWebgl, SiTypescript],
+      "Spill Post merupakan salah satu platform medsos yang mirip seperti twitter instagram dll, yang saya kembangkan sendiri untuk project independen saya yang sekarang masiih dalam tahap pengembangan dan kedepan nya semoga bisa lebih baik lagi",
+    link: "https://spill-post.vercel.app/",
+    source: "https://github.com/evanstef/Spill-Post",
+    tech: [
+      SiJavascript,
+      SiPhp,
+      SiLaravel,
+      SiAlpinedotjs,
+      SiTailwindcss,
+      SiMysql,
+    ],
+  },
+  {
+    id: 5,
+    title: "API Books",
+    image: sepuluh,
+    description:
+      "API buku yang saya buat sendiri yang mana datanya lebih dari 500+ title buku untuk sekarang hanya ada novel saja semoga kedepannya bisa makin bertambah bersumber dari salah satu website buku yaitu https://www.goodreads.com/",
+    link: "https://evan-movie-search.vercel.app/",
+    source: "https://github.com/evanstef/nest-books-api",
+    tech: [SiNestjs, SiNodedotjs, SiMysql, SiPrisma],
+  },
+  {
+    id: 7,
+    title: "Sekaben Camp",
+    image: tujuh,
+    description:
+      "Sekaben Camp merupakan jasa sewa alat-alat camping yang ada di Bangka Belitung ini merupakan website company profile dari perusahaan Sekaben Camp, Sekaben camp merupakan salah satu bisa di bilang startup di bidang penyewaan jasa alat camping dengan memanfaatkan wisata alam yang banyak di daerah Bangka Belitung sehingga memungkinkan untuk membuka usaha sewa alat camping karena Bangka terkenal akan pantai,bukit,hutan dan wisata alam lainnya jadi buat temen-temen yang hobi camping tidak perlu bingung jika tidak punya alat camping Sekaben Camp bisa menjadi pilihan dan yang pasti dengan harga yang terjangkau. tantangan dalam mengelola website ini adalah soal SEO nya awalnya saya ingin menggunakkan domain bawaan vercel dengan menggunakkan DNS provider cloudflare namun sangat sulit untuk mengkonekan si cloudflare ke vercel jadi saya memutuskan untuk membeli domain .my.id karena harganya murah sehingga website bisa di daftarkan di google search console dan SEO nya berjalan",
+    link: "https://sekabencampid.my.id/",
+    source: "https://github.com/evanstef/Sekaben-camp",
+    tech: [SiNextdotjs, SiDaisyui, SiFramer, SiTailwindcss, SiTypescript],
   },
   {
     id: 8,
@@ -51,16 +83,15 @@ export const data = [
     ],
   },
   {
-    id: 7,
-    title: "Sekaben Camp",
-    image: tujuh,
+    id: 9,
+    title: "Animation 3D Model Web",
+    image: sembilan,
     description:
-      "Sekaben Camp merupakan jasa sewa alat-alat camping yang ada di Bangka Belitung ini merupakan website company profile dari perusahaan Sekaben Camp, Sekaben camp merupakan salah satu bisa di bilang startup di bidang penyewaan jasa alat camping dengan memanfaatkan wisata alam yang banyak di daerah Bangka Belitung sehingga memungkinkan untuk membuka usaha sewa alat camping karena Bangka terkenal akan pantai,bukit,hutan dan wisata alam lainnya jadi buat temen-temen yang hobi camping tidak perlu bingung jika tidak punya alat camping Sekaben Camp bisa menjadi pilihan dan yang pasti dengan harga yang terjangkau. tantangan dalam mengelola website ini adalah soal SEO nya awalnya saya ingin menggunakkan domain bawaan vercel dengan menggunakkan DNS provider cloudflare namun sangat sulit untuk mengkonekan si cloudflare ke vercel jadi saya memutuskan untuk membeli domain .my.id karena harganya murah sehingga website bisa di daftarkan di google search console dan SEO nya berjalan",
-    link: "https://sekabencampid.my.id/",
-    source: "https://github.com/evanstef/Sekaben-camp",
-    tech: [SiNextdotjs, SiDaisyui, SiFramer, SiTailwindcss, SiTypescript],
+      "mengimplementasikan desain web 3D yang sudah saya pelajari hanya untuk sekedar latihan saja cara membuat web 3D jadi mungkin kedepannya saya akan membuat website yang ada unsur 3D saya menggunakkan webstie skectfab.com untuk mencari asset 3D model yang saya mau kendala saat membuat website ini adalah setup webgi yang agak rumit, namun saya ada kendala di bagian preview mode sehingga user bisa merotate 3d model tersebut pada saat di development masih berjalan lancar namun setelah naik ke production user tidak bisa merotate 3d model tersebut jadi, untuk sementara saya masih menonaktifkan fitur tersebut. dan mencoba debugging terlebih dahulu",
+    link: "https://vortex-gt-8.vercel.app/",
+    source: "https://github.com/evanstef/Animation-Web-3D",
+    tech: [SiNextdotjs, SiTailwindcss, SiFramer, SiWebgl, SiTypescript],
   },
-
   {
     id: 6,
     title: "Diary App",
@@ -77,17 +108,6 @@ export const data = [
       SiFramer,
       SiTypescript,
     ],
-  },
-
-  {
-    id: 5,
-    title: "API Books",
-    image: sepuluh,
-    description:
-      "API buku yang saya buat sendiri yang mana datanya lebih dari 500+ title buku untuk sekarang hanya ada novel saja semoga kedepannya bisa makin bertambah bersumber dari salah satu website buku yaitu https://www.goodreads.com/",
-    link: "https://evan-movie-search.vercel.app/",
-    source: "https://github.com/evanstef/nest-books-api",
-    tech: [SiNestjs, SiNodedotjs, SiMysql, SiPrisma],
   },
 
   {
