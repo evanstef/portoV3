@@ -5,6 +5,7 @@ import tujuh from "../../public/project-tujuh.png";
 import sepuluh from "../../public/project-sepuluh.png";
 import netflix from "../../public/Screenshot 2024-06-12 085200.png";
 import spill from "../../public/spill-post.png";
+import bangkahire from "../../public/bangka-hire.png";
 import {
   SiFramer,
   SiNextdotjs,
@@ -23,9 +24,31 @@ import {
   SiAlpinedotjs,
   SiJavascript,
   SiPhp,
+  SiReactquery,
 } from "react-icons/si";
 
 export const data = [
+  {
+    id: 11,
+    title: "Bangka Hire",
+    image: bangkahire,
+    description:
+      "Bangka Hire merupakan platform pencarian kerja online seperti linkedin, glints dan lain sebagainya namun ini khusus daerah bangka yang kita kembangkan saya, haikel ilham hakim dan taufik hidayat sebagai UI/UX designnya",
+    link: "https://bangka-hire.ekel.dev/",
+    source: "private",
+    tech: [
+      SiTypescript,
+      SiTailwindcss,
+      SiShadcnui,
+      SiFramer,
+      SiNextdotjs,
+      SiReactquery,
+      SiAxios,
+      SiPrisma,
+      SiSupabase,
+    ],
+    collab: "haikelz",
+  },
   {
     id: 10,
     title: "Spill Post",

@@ -197,6 +197,7 @@ function IconContainer({
           style={{ width: widthIcon, height: heightIcon }}
           className={`flex items-center justify-center ${iconColorClass} w-5 h-5`}>
           {icon}
+
         </motion.div>
       </motion.div>
     </Link>
