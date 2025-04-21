@@ -14,9 +14,27 @@ const pixelify = Geist_Mono({
   style: "normal",
 });
 
+const title = "Evan Stefanus | Portofolio";
+const description = "Digital Guestbook, Portofolio, Projects By Evan Stefanus";
+const url = "https://portofolio-evan.vercel.app/";
+
 export const metadata: Metadata = {
-  title: "Porto Evan",
-  description: "Portofolio Evan V3",
+  title,
+  description,
+  openGraph: {
+    type: "website",
+    url,
+    title,
+    description,
+    images: [
+      {
+        url,
+        alt: "OG Image",
+      },
+    ],
+    siteName: "portofolio-evan.vercel.app",
+  },
+  metadataBase: new URL(url),
 };
 
 export default function RootLayout({

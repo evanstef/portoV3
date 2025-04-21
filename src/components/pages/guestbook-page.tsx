@@ -171,7 +171,11 @@ export default function GuestbookPage() {
             <button
               type="submit"
               disabled={createCommentMutation.isPending}
-              className="flex items-center gap-2 bg-gray-900 dark:bg-gray-300 p-2 rounded-md hover:cursor-pointer text-gray-300 dark:text-gray-900 whitespace-nowrap">
+              className={`flex items-center gap-2 bg-gray-900 dark:bg-gray-300 p-2 rounded-md ${
+                createCommentMutation.isPending
+                  ? "hover:cursor-not-allowed"
+                  : "hover:cursor-pointer"
+              } text-gray-300 dark:text-gray-900 whitespace-nowrap`}>
               {createCommentMutation.isPending ? (
                 <IconLoader3 className="animate-spin w-4 h-4 lg:w-6 lg:h-6" />
               ) : (
