@@ -80,7 +80,7 @@ export default function CommentList() {
           </div>
 
           {/* tanggal dan jam */}
-          <div className="text-[10px] lg:text-xs flex flex-col items-end w-[20%] justify-center">
+          <div className="text-[8px] sm:text-[10px] lg:text-xs flex flex-col items-end w-[20%] justify-center">
             <p>
               {new Date(comment.createdAt).toLocaleDateString("id-ID", {
                 day: "numeric",
