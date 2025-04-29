@@ -96,7 +96,7 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto flex h-[60px] gap-4 items-end rounded-md bg-gray-300 dark:bg-gray-900 border border-gray-900 dark:border-gray-300 px-3 pb-3",
+        "mx-auto flex h-[60px] gap-4 items-end rounded-md bg-gray-300 dark:bg-gray-900 border border-gray-900 dark:border-gray-300 px-3 pb-3 transition-transform duration-300",
         className
       )}>
       {items.map((item) => (
@@ -167,7 +167,7 @@ function IconContainer({
 
   // Determine background color based on active state
   const bgColor = isActive
-    ? "bg-white dark:bg-black"
+    ? "bg-gray-100 dark:bg-gray-700"
     : "bg-gray-900 dark:bg-gray-300";
   // Determine icon color based on active state
   const iconColorClass = isActive
@@ -197,7 +197,6 @@ function IconContainer({
           style={{ width: widthIcon, height: heightIcon }}
           className={`flex items-center justify-center ${iconColorClass} w-5 h-5`}>
           {icon}
-
         </motion.div>
       </motion.div>
     </Link>

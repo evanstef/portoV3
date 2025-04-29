@@ -104,15 +104,15 @@ export const HoverEffect = ({
                 {/* jika ada collab maka tampilkan */}
                 {item.collab &&
                   (isPending ? (
-                    <div className="absolute top-2 right-1 bg-gray-900 dark:bg-gray-300 p-1 rounded-md">
-                      <IconLoader3 className="animate-spin text-gray-300 dark:text-gray-900 w-5 h-5" />
+                    <div className="absolute top-2 right-1 bg-gray-300 dark:bg-gray-900 p-1 rounded-md">
+                      <IconLoader3 className="animate-spin text-gray-900 dark:text-gray-300 w-5 h-5" />
                     </div>
                   ) : (
                     usernameToDataMap[item.collab] && (
                       <Link
                         href={usernameToDataMap[item.collab].html_url}
                         target="_blank"
-                        className="absolute top-2 right-1 text-[11px] bg-gray-900 dark:bg-gray-300 p-1 rounded-md flex items-center gap-1 text-gray-300 dark:text-gray-900">
+                        className="absolute top-2 right-1 text-[11px] bg-gray-200 dark:bg-gray-800 p-1 rounded-md flex items-center gap-1 text-gray-900 dark:text-gray-300">
                         <p>Collab With</p>
                         <div className="flex items-center gap-1">
                           <p>{usernameToDataMap[item.collab].login}</p>
@@ -140,7 +140,7 @@ export const HoverEffect = ({
                     {item.tech.map((Icon, idx) => (
                       <Icon
                         key={idx}
-                        className="text-2xl text-gray-300 dark:text-gray-900"
+                        className="text-2xl text-gray-900 dark:text-gray-300"
                       />
                     ))}
                   </div>
@@ -216,7 +216,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "rounded-xl h-full w-full overflow-hidden bg-gray-900 dark:bg-gray-300 relative z-20",
+        "rounded-xl h-full w-full overflow-hidden bg-gray-200 dark:bg-gray-800 relative z-20",
         className
       )}>
       <div className="relative z-50">{children}</div>
@@ -233,7 +233,7 @@ export const CardTitle = ({
   return (
     <h4
       className={cn(
-        "text-gray-300 dark:text-gray-900 font-bold tracking-wide",
+        "text-gray-900 dark:text-gray-300 font-bold tracking-wide",
         className
       )}>
       {children}
@@ -250,7 +250,7 @@ export const CardDescription = ({
   return (
     <p
       className={cn(
-        "text-gray-300 dark:text-gray-900 leading-relaxed text-xs",
+        "text-gray-900 dark:text-gray-300 leading-relaxed text-xs",
         className
       )}>
       {children}

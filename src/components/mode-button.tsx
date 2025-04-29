@@ -8,6 +8,8 @@ export default function ModeButton() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const [rightOffset, setRightOffset] = useState(0);
+  const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     function updateOffset() {
@@ -17,10 +19,29 @@ export default function ModeButton() {
       setRightOffset(offset);
     }
 
+    function handleScroll() {
+      if (typeof window !== "undefined") {
+        if (window.scrollY > lastScrollY) {
+          // Scroll ke bawah - sembunyikan navbar
+          setShow(false);
+        } else {
+          // Scroll ke atas - tampilkan navbar
+          setShow(true);
+        }
+
+        // Update posisi scroll terakhir
+        setLastScrollY(window.scrollY);
+      }
+    }
+
     updateOffset();
+    window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", updateOffset);
-    return () => window.removeEventListener("resize", updateOffset);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateOffset);
+    };
+  }, [lastScrollY]);
 
   useEffect(() => {
     setMounted(true);
@@ -33,7 +54,9 @@ export default function ModeButton() {
   return (
     <button
       style={{ right: `${rightOffset + 20}px` }}
-      className="w-12 h-12 rounded-lg flex items-center justify-center bg-gray-300 dark:bg-gray-900 border-gray-900 fixed bottom-[26px] dark:border-gray-300 hover:cursor-pointer border z-50"
+      className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gray-300 dark:bg-gray-900 border-gray-900 fixed bottom-[26px] dark:border-gray-300 hover:cursor-pointer border z-50 transition-transform duration-300 ${
+        show ? "translate-y-0" : "translate-y-50"
+      }`}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       aria-label="Toggle dark mode">
       {theme === "dark" ? (
