@@ -16,19 +16,19 @@ export default function CommentList() {
       filter: "blur(7px)",
       y: 50,
       ease: "power2.out",
-      stagger: 0.05,
+      stagger: 0.03,
       delay: 0.4,
     });
   });
 
   const { data, isPending } = useQuery({
     queryKey: ["comments"],
-    queryFn: async () => {
-      return await getComments();
-    },
+    queryFn: getComments,
     refetchOnWindowFocus: false,
+    refetchOnMount: false, // Tambahkan ini - mencegah refetch saat komponen di-mount
+    refetchOnReconnect: false, // Tambahkan ini - mencegah refetch saat koneksi pulih
     retry: false,
-    staleTime: 1000 * 60 * 5,
+    staleTime: Infinity, // Ubah ke Infinity agar data tidak pernah dianggap stale
   });
 
   const comments = data?.data;
@@ -55,7 +55,7 @@ export default function CommentList() {
   }
   return (
     <div className="flex flex-col gap-4 mt-4 comment-list">
-      {comments?.map((comment: GetComment) => (
+      {comments.map((comment: GetComment) => (
         <div
           key={comment.id}
           className="flex items-center justify-between border border-gray-900 dark:border-gray-300 p-2 rounded-md">
