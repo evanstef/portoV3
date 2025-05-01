@@ -25,10 +25,10 @@ export default function CommentList() {
     queryKey: ["comments"],
     queryFn: getComments,
     refetchOnWindowFocus: false,
-    refetchOnMount: false, // Tambahkan ini - mencegah refetch saat komponen di-mount
+    refetchOnMount: true, // Tambahkan ini - mencegah refetch saat komponen di-mount
     refetchOnReconnect: false, // Tambahkan ini - mencegah refetch saat koneksi pulih
     retry: false,
-    staleTime: Infinity, // Ubah ke Infinity agar data tidak pernah dianggap stale
+    staleTime: 1000 * 60 * 60 * 24 * 3, // stale time selama 3 hari untuk mentrigger refetch
   });
 
   const comments = data?.data;

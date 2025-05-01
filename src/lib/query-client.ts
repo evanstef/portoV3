@@ -6,7 +6,7 @@ export function setupQueryClient() {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: Infinity,
+        staleTime: 1000 * 60 * 60 * 24 * 3, // stale time selama 3 hari
       },
     },
   });
@@ -20,6 +20,8 @@ export function setupQueryClient() {
     persistQueryClient({
       queryClient,
       persister,
+      maxAge: 1000 * 60 * 60 * 24 * 3, // stale time selama 3 hari
+      buster: "1",
     });
   }
 
