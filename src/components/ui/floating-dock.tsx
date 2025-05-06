@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Note: Use position fixed according to your needs
  * Desktop navbar is better positioned at the bottom
@@ -20,14 +21,28 @@ import { useRef, useState } from "react";
 export const FloatingDock = ({
   items,
   desktopClassName,
+  setTheme,
+  theme,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
+  items: {
+    title: string;
+    icon: React.ReactNode;
+    href: string;
+    type: string; // Ensure type is included
+  }[];
   desktopClassName?: string;
   mobileClassName?: string;
+  setTheme: any;
+  theme: any;
 }) => {
   return (
     <>
-      <FloatingDockDesktop items={items} className={desktopClassName} />
+      <FloatingDockDesktop
+        items={items}
+        className={desktopClassName}
+        setTheme={setTheme}
+        theme={theme}
+      />
     </>
   );
 };
@@ -86,9 +101,13 @@ export const FloatingDock = ({
 const FloatingDockDesktop = ({
   items,
   className,
+  setTheme,
+  theme,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
+  items: { title: string; icon: React.ReactNode; href: string; type: string }[];
   className?: string;
+  setTheme: any;
+  theme: any;
 }) => {
   const mouseX = useMotionValue(Infinity);
   return (
@@ -100,7 +119,13 @@ const FloatingDockDesktop = ({
         className
       )}>
       {items.map((item) => (
-        <IconContainer mouseX={mouseX} key={item.title} {...item} />
+        <IconContainer
+          mouseX={mouseX}
+          key={item.title}
+          {...item}
+          setTheme={setTheme}
+          theme={theme}
+        />
       ))}
     </motion.div>
   );
@@ -110,12 +135,18 @@ function IconContainer({
   mouseX,
   title,
   icon,
+  type,
   href,
+  setTheme,
+  theme,
 }: {
   mouseX: MotionValue;
   title: string;
+  type: string;
   icon: React.ReactNode;
   href: string;
+  setTheme: any;
+  theme: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const pathname = usePathname(); // Get current pathname
@@ -174,7 +205,35 @@ function IconContainer({
     ? "text-gray-900 dark:text-gray-300"
     : "text-gray-300 dark:text-gray-900";
 
-  return (
+  return type === "button" ? (
+    <button
+      className="cursor-pointer"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+      <motion.div
+        ref={ref}
+        style={{ width, height }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        className={`rounded-full flex items-center justify-center relative ${bgColor} transition-colors duration-200`}>
+        <AnimatePresence>
+          {hovered && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, x: "-50%" }}
+              animate={{ opacity: 1, y: 0, x: "-50%" }}
+              exit={{ opacity: 0, y: 2, x: "-50%" }}
+              className="px-2 py-0.5 whitespace-pre rounded-md bg-gray-900 text-gray-300 dark:bg-gray-300 dark:text-gray-900 absolute left-1/2 -translate-x-1/2 -top-6 w-fit text-xs">
+              {title}
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <motion.div
+          style={{ width: widthIcon, height: heightIcon }}
+          className={`flex items-center justify-center ${iconColorClass} w-5 h-5`}>
+          {icon}
+        </motion.div>
+      </motion.div>
+    </button>
+  ) : (
     <Link href={href}>
       <motion.div
         ref={ref}
