@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { cn } from '@/lib/utils';
+import { useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 import {
   SiJavascript,
   SiTypescript,
@@ -14,11 +14,11 @@ import {
   SiMongodb,
   SiNodedotjs,
   SiPrisma,
-} from 'react-icons/si';
-import { LinkPreview } from '../ui/link-preview';
-import Image from 'next/image';
-import { useGSAP } from '@gsap/react';
-import { gsap } from 'gsap';
+} from "react-icons/si";
+import { LinkPreview } from "../ui/link-preview";
+import Image from "next/image";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
 
 export default function HomePage() {
   const [hovered, setHovered] = useState(false);
@@ -28,62 +28,62 @@ export default function HomePage() {
     () => {
       const tl = gsap.timeline();
 
-      tl.from('.nama-evan', {
+      tl.from(".nama-evan", {
         duration: 0.1,
         opacity: 0,
-        filter: 'blur(7px)',
+        filter: "blur(7px)",
         y: 50,
-        ease: 'power2.out',
+        ease: "power2.out",
       })
-        .from('.headline-text', {
+        .from(".headline-text", {
           duration: 0.1,
           opacity: 0,
-          filter: 'blur(7px)',
+          filter: "blur(7px)",
           y: 50,
-          ease: 'power2.out',
+          ease: "power2.out",
         })
-        .from('.gambar-meme', {
+        .from(".gambar-meme", {
           duration: 0.1,
           opacity: 0,
-          filter: 'blur(7px)',
+          filter: "blur(7px)",
           x: 50,
-          ease: 'power2.out',
+          ease: "power2.out",
         })
-        .from('.little-peace', {
+        .from(".little-peace", {
           duration: 0.1,
           opacity: 0,
-          filter: 'blur(7px)',
+          filter: "blur(7px)",
           y: 50,
-          ease: 'power2.out',
+          ease: "power2.out",
         })
-        .from('.desc-litte-peace', {
+        .from(".desc-litte-peace", {
           duration: 0.1,
           opacity: 0,
-          filter: 'blur(7px)',
+          filter: "blur(7px)",
           y: 50,
-          ease: 'power2.out',
+          ease: "power2.out",
         })
-        .from('.skill-set div', {
+        .from(".skill-set div", {
           duration: 0.1,
           opacity: 0,
-          filter: 'blur(7px)',
+          filter: "blur(7px)",
           y: 30,
-          ease: 'power2.out',
+          ease: "power2.out",
           stagger: 0.05,
         })
-        .from('.experience-title', {
+        .from(".experience-title", {
           duration: 0.1,
           opacity: 0,
-          filter: 'blur(7px)',
+          filter: "blur(7px)",
           y: 50,
-          ease: 'power2.out',
+          ease: "power2.out",
         })
-        .from('.experience-set div', {
+        .from(".experience-set div", {
           duration: 0.1,
           opacity: 0,
-          filter: 'blur(7px)',
+          filter: "blur(7px)",
           y: 50,
-          ease: 'power2.out',
+          ease: "power2.out",
           stagger: 0.05,
         });
     },
@@ -108,14 +108,14 @@ export default function HomePage() {
         <div className="gambar-meme">
           <div
             className={cn(
-              'group cursor-pointer overflow-hidden relative rounded-md mx-auto w-28 h-28 sm:w-32 sm:h-32 xl:w-36 xl:h-36 -rotate-6 flex flex-col justify-end p-4',
+              "group cursor-pointer overflow-hidden relative rounded-md mx-auto w-28 h-28 sm:w-32 sm:h-32 xl:w-36 xl:h-36 -rotate-6 flex flex-col justify-end p-4",
               "bg-[url('/muka-1.png')] bg-cover bg-center",
               // Preload hover image by setting it in a pseudo-element
-              'before:bg-[url(https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmx4bWVweDRmbzRobWx0dnRqMHNxbW1ma3Z5b2ljOHNzcXR4YWM2MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3Owa0TWYqHi5RZYGql/giphy.gif)] before:fixed before:inset-0 before:opacity-0 before:z-[-1]',
-              'hover:bg-[url(https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmx4bWVweDRmbzRobWx0dnRqMHNxbW1ma3Z5b2ljOHNzcXR4YWM2MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3Owa0TWYqHi5RZYGql/giphy.gif)]',
+              "before:bg-[url(https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmx4bWVweDRmbzRobWx0dnRqMHNxbW1ma3Z5b2ljOHNzcXR4YWM2MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3Owa0TWYqHi5RZYGql/giphy.gif)] before:fixed before:inset-0 before:opacity-0 before:z-[-1]",
+              "hover:bg-[url(https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmx4bWVweDRmbzRobWx0dnRqMHNxbW1ma3Z5b2ljOHNzcXR4YWM2MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3Owa0TWYqHi5RZYGql/giphy.gif)]",
               "hover:after:content-[''] hover:after:absolute hover:after:inset-0 hover:after:bg-black hover:after:opacity-50",
-              'transition-all duration-500',
-              'text-gray-300 hover:text-gray-900'
+              "transition-all duration-500",
+              "text-gray-300 hover:text-gray-900"
             )}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
@@ -123,10 +123,10 @@ export default function HomePage() {
             <div className="text relative z-50">
               <h1
                 className={`font-bold text-[8px] sm:text-[10px] lg:text-xs relative text-center ${
-                  hovered ? 'bg-gray-300' : 'bg-gray-900'
+                  hovered ? "bg-gray-300" : "bg-gray-900"
                 } p-1 rounded-xl`}
               >
-                {hovered ? 'Im Hiding!!' : 'Please Hover!!'}
+                {hovered ? "Im Hiding!!" : "Please Hover!!"}
               </h1>
             </div>
           </div>
@@ -141,7 +141,7 @@ export default function HomePage() {
           </h1>
           <Image
             src={
-              'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHRzYTAwcTd1OXdycGJzaGUxbnZucDM0MTd2d3FmY2Rmc3UwNGQ5aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/L4epvaYdygiHV1Z2ET/giphy.gif'
+              "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHRzYTAwcTd1OXdycGJzaGUxbnZucDM0MTd2d3FmY2Rmc3UwNGQ5aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/L4epvaYdygiHV1Z2ET/giphy.gif"
             }
             alt="adwa"
             width={150}
@@ -249,6 +249,21 @@ export default function HomePage() {
         </h1>
 
         <div className="experience-set space-y-4">
+          {/* Linkupcareer.id */}
+          <div>
+            <div className="flex justify-between items-center">
+              <h1 className="text-sm line-clamp-1 lg:text-lg font-bold">
+                Linkupcareer.id
+              </h1>
+              <p className="text-[10px] sm:text-xs lg:text-base">
+                Jul 2025 - present
+              </p>
+            </div>
+            <p className="text-xs sm:text-sm lg:text-base">
+              Frontend Developer
+            </p>
+          </div>
+
           {/* Puskesmas PangkalBalam */}
           <div>
             <div className="flex justify-between items-center">
