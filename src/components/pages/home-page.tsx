@@ -109,7 +109,7 @@ export default function HomePage() {
           <div
             className={cn(
               "group cursor-pointer overflow-hidden relative rounded-md mx-auto w-28 h-28 sm:w-32 sm:h-32 xl:w-36 xl:h-36 -rotate-6 flex flex-col justify-end p-4",
-              "bg-[url('/muka-1.png')] bg-cover bg-center",
+              "bg-[url('/467lxb.jpg')] bg-cover bg-center",
               // Preload hover image by setting it in a pseudo-element
               "before:bg-[url(https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmx4bWVweDRmbzRobWx0dnRqMHNxbW1ma3Z5b2ljOHNzcXR4YWM2MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3Owa0TWYqHi5RZYGql/giphy.gif)] before:fixed before:inset-0 before:opacity-0 before:z-[-1]",
               "hover:bg-[url(https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmx4bWVweDRmbzRobWx0dnRqMHNxbW1ma3Z5b2ljOHNzcXR4YWM2MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3Owa0TWYqHi5RZYGql/giphy.gif)]",
