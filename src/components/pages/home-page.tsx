@@ -271,25 +271,12 @@ export default function HomePage() {
                 Puskesmas PangkalBalam
               </h1>
               <p className="text-[10px] sm:text-xs lg:text-base">
-                Mar 2025 - present
+                Apr 2025 - Aug 2025
               </p>
             </div>
             <p className="text-xs sm:text-sm lg:text-base">
               Software Developer
             </p>
-          </div>
-
-          {/* Freelance */}
-          <div>
-            <div className="flex justify-between items-center">
-              <h1 className="text-sm line-clamp-1 lg:text-lg font-bold">
-                Freelance
-              </h1>
-              <p className="text-[10px] sm:text-xs lg:text-base">
-                2024 - present
-              </p>
-            </div>
-            <p className="text-xs sm:text-sm lg:text-base">Web Developer</p>
           </div>
 
           {/* PT CADADUSA ACINTYA DAKARA */}
