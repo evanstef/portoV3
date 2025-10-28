@@ -249,6 +249,21 @@ export default function HomePage() {
         </h1>
 
         <div className="experience-set space-y-4">
+          {/* Pulau Intan Lestari*/}
+          <div>
+            <div className="flex justify-between items-center">
+              <h1 className="text-sm line-clamp-1 lg:text-lg font-bold">
+                Pulau Intan Lestari
+              </h1>
+              <p className="text-[10px] sm:text-xs lg:text-base">
+                Nov 2025 - present
+              </p>
+            </div>
+            <p className="text-xs sm:text-sm lg:text-base">
+              Full Stack Developer
+            </p>
+          </div>
+
           {/* Linkupcareer.id */}
           <div>
             <div className="flex justify-between items-center">
