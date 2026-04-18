@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { IconSun, IconMoon } from "@tabler/icons-react";
 
 export default function ModeButton() {
   const [mounted, setMounted] = useState(false);
@@ -13,7 +12,7 @@ export default function ModeButton() {
 
   useEffect(() => {
     function updateOffset() {
-      const containerWidth = 768; // 3xl = 768px
+      const containerWidth = 768;
       const windowWidth = window.innerWidth;
       const offset = Math.max(0, (windowWidth - containerWidth) / 2);
       setRightOffset(offset);
@@ -22,14 +21,10 @@ export default function ModeButton() {
     function handleScroll() {
       if (typeof window !== "undefined") {
         if (window.scrollY > lastScrollY) {
-          // Scroll ke bawah - sembunyikan navbar
           setShow(false);
         } else {
-          // Scroll ke atas - tampilkan navbar
           setShow(true);
         }
-
-        // Update posisi scroll terakhir
         setLastScrollY(window.scrollY);
       }
     }
@@ -51,19 +46,54 @@ export default function ModeButton() {
     return null;
   }
 
+  const isDark = theme === "dark";
+
   return (
     <button
+      type="button"
       style={{ right: `${rightOffset + 20}px` }}
-      className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gray-300 dark:bg-gray-900 border-gray-900 fixed bottom-[26px] dark:border-gray-300 hover:cursor-pointer border z-50 transition-transform duration-300 ${
-        show ? "translate-y-0" : "translate-y-50"
+      className={`font-pixel fixed bottom-[26px] z-50 flex h-12 w-12 items-center justify-center pixel-border pixel-shadow-sm pixel-step bg-[var(--bg-elevated)] hover:-translate-x-[2px] hover:-translate-y-[2px] hover:pixel-shadow-md ${
+        show ? "translate-y-0" : "translate-y-24"
       }`}
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      aria-label="Toggle dark mode">
-      {theme === "dark" ? (
-        <IconSun className="w-5 h-5 lg:h-6 lg:w-6 text-gray-300" />
-      ) : (
-        <IconMoon className="w-5 h-5 lg:h-6 lg:w-6 text-gray-900" />
-      )}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label="Toggle dark mode"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 16 16"
+        style={{ shapeRendering: "crispEdges" }}
+      >
+        {isDark ? (
+          <g fill="var(--accent-yellow)">
+            <rect x="7" y="2" width="2" height="2" />
+            <rect x="5" y="5" width="6" height="6" />
+            <rect x="6" y="4" width="4" height="1" />
+            <rect x="6" y="11" width="4" height="1" />
+            <rect x="4" y="6" width="1" height="4" />
+            <rect x="11" y="6" width="1" height="4" />
+            <rect x="7" y="12" width="2" height="2" />
+            <rect x="2" y="7" width="2" height="2" />
+            <rect x="12" y="7" width="2" height="2" />
+            <rect x="3" y="3" width="2" height="2" />
+            <rect x="11" y="3" width="2" height="2" />
+            <rect x="3" y="11" width="2" height="2" />
+            <rect x="11" y="11" width="2" height="2" />
+          </g>
+        ) : (
+          <g fill="var(--accent-cyan)">
+            <rect x="5" y="3" width="5" height="1" />
+            <rect x="4" y="4" width="2" height="1" />
+            <rect x="4" y="5" width="2" height="1" />
+            <rect x="3" y="6" width="2" height="4" />
+            <rect x="4" y="10" width="2" height="1" />
+            <rect x="4" y="11" width="2" height="1" />
+            <rect x="5" y="12" width="5" height="1" />
+            <rect x="10" y="11" width="1" height="1" />
+            <rect x="11" y="10" width="1" height="1" />
+          </g>
+        )}
+      </svg>
     </button>
   );
 }

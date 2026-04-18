@@ -12,35 +12,33 @@ export default function ProjectPage() {
   useGSAP(
     () => {
       const tl = gsap.timeline();
-      tl.from(".title-project", {
-        duration: 0.1,
+      const common = {
+        duration: 0.12,
         opacity: 0,
-        filter: "blur(7px)",
-        y: 50,
-        ease: "power2.out",
-      }).from(".desc-project", {
-        duration: 0.1,
-        opacity: 0,
-        filter: "blur(7px)",
-        y: 50,
-        ease: "power2.out",
-      });
+        filter: "blur(6px)",
+        y: 40,
+        ease: "steps(4)",
+      };
+      tl.from(".title-project", common).from(".desc-project", common);
     },
     { scope: projectPage }
   );
+
   return (
     <div ref={projectPage} className="space-y-4 xl:space-y-6">
-      <div className="space-y-4 border-b border-gray-900 dark:border-gray-300 pb-4 mb-4">
-        <h1 className="text-base sm:text-lg lg:text-2xl font-bold title-project">
-          a lot experiment and projects are here
+      <section className="pb-2">
+        <h1 className="font-pixel title-project text-base sm:text-xl lg:text-2xl text-[var(--accent-wheat)]">
+          &gt; COMMUNITY CENTER
         </h1>
-        <p className="text-xs sm:text-sm lg:text-base desc-project">
-          This is a collection of my projects and experiments. You can find
-          various projects that I have worked on and some experiments that I
-          have done. I hope you find them interesting and useful.
+        <p className="desc-project text-xs sm:text-sm lg:text-base text-[var(--fg-muted)] mt-3 font-mono">
+          &gt; projects completed on the farm.
+          <br />
+          &gt; browse the bulletin board below.
         </p>
-      </div>
-      {/* list of projects */}
+      </section>
+
+      <div aria-hidden className="pixel-divider" />
+
       <HoverEffect items={data} />
     </div>
   );

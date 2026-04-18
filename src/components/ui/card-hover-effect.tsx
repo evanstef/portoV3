@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "motion/react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { IconType } from "react-icons/lib";
 import { SiGithub, SiGooglechrome } from "react-icons/si";
 import { useGSAP } from "@gsap/react";
@@ -13,247 +10,160 @@ import { gsap } from "gsap";
 import { useQuery } from "@tanstack/react-query";
 import { getGithubUser } from "@/services/common";
 import { IconLoader3 } from "@tabler/icons-react";
+import { getProjectSlug } from "@/data-project/data-project";
 
-export const HoverEffect = ({
-  items,
-  className,
-}: {
-  items: {
-    id: number;
-    title: string;
-    description: string;
-    source: string;
-    image: StaticImageData;
-    link: string;
-    tech?: IconType[];
-    collab?: string;
-  }[];
+type ProjectItem = {
+  id: number;
+  title: string;
+  description: string;
+  source: string;
+  image: StaticImageData;
+  link: string;
+  tech?: IconType[];
+  collab?: string;
+};
+
+type GithubUserProfile = {
+  login: string;
+  avatar_url: string;
+  html_url: string;
+};
+
+type HoverEffectProps = {
+  items: ProjectItem[];
   className?: string;
-}) => {
+};
+
+export const HoverEffect = ({ items, className }: HoverEffectProps) => {
   useGSAP(() => {
     const tl = gsap.timeline();
-    tl.from(".card-project .hasil-project", {
+    tl.from(".card-project", {
       duration: 0.15,
       opacity: 0,
-      filter: "blur(7px)",
-      y: 50,
-      ease: "power2.out",
-      stagger: 0.1,
+      filter: "blur(6px)",
+      y: 40,
+      ease: "steps(4)",
+      stagger: 0.08,
       delay: 0.2,
     });
   });
 
-  const username = items
-    .filter((item) => item.collab)
-    .map((item) => item.collab);
+  const usernames = items
+    .map((item) => item.collab)
+    .filter((name): name is string => Boolean(name));
 
-  const { data, isPending } = useQuery({
-    queryKey: ["users-profile"],
+  const { data, isPending } = useQuery<GithubUserProfile[]>({
+    queryKey: ["users-profile", usernames],
     queryFn: async () => {
-      // di cek terlebih dahulu apakah username array ada
-      if (username.length > 0) {
-        // Buat array of promises dengan memanggil getGithubUser untuk setiap username
-        const promises = username.map((user) => getGithubUser(user as string));
-        // Menjalankan semua promise secara parallel dan menunggu semua selesai
-        return await Promise.all(promises);
-      }
-      return [];
+      if (usernames.length === 0) return [];
+      const responses = await Promise.all(
+        usernames.map((user) => getGithubUser(user) as Promise<GithubUserProfile>)
+      );
+      return responses;
     },
+    enabled: usernames.length > 0,
   });
 
-  const usernameToDataMap: any = {};
+  const collabMap: Record<string, GithubUserProfile> = {};
   if (data) {
     data.forEach((user) => {
-      if (user && user.login) {
-        usernameToDataMap[user.login] = user;
-      }
+      if (user?.login) collabMap[user.login] = user;
     });
   }
 
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-
   return (
-    <div className={cn("grid grid-cols-1 sm:grid-cols-2 py-5", className)}>
-      {items.map((item, idx) => (
-        <div
-          key={item?.id}
-          className="relative group block p-3 h-full w-full"
-          onMouseEnter={() => setHoveredIndex(idx)}
-          onMouseLeave={() => setHoveredIndex(null)}>
-          <AnimatePresence>
-            {hoveredIndex === idx && (
-              <motion.span
-                className="absolute inset-0 h-full w-full block bg-gray-900/60 dark:bg-gray-300/60 rounded-3xl"
-                layoutId="hoverBackground"
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: { duration: 0.2, ease: "easeInOut" },
-                }}
-                exit={{
-                  opacity: 0,
-                  transition: { duration: 0.2, delay: 0.2 },
-                }}
-              />
-            )}
-          </AnimatePresence>
-          <div className="card-project">
-            <Card className="hasil-project">
-              <div className="relative w-full aspect-video">
-                <Image src={item.image} alt="" fill className="object-cover" />
-                {/* jika ada collab maka tampilkan */}
-                {item.collab &&
-                  (isPending ? (
-                    <div className="absolute top-2 right-1 bg-gray-300 dark:bg-gray-900 p-1 rounded-md">
-                      <IconLoader3 className="animate-spin text-gray-900 dark:text-gray-300 w-5 h-5" />
-                    </div>
-                  ) : (
-                    usernameToDataMap[item.collab] && (
-                      <Link
-                        href={usernameToDataMap[item.collab].html_url}
-                        target="_blank"
-                        className="absolute top-2 right-1 text-[11px] bg-gray-200 dark:bg-gray-800 p-1 rounded-md flex items-center gap-1 text-gray-900 dark:text-gray-300">
-                        <p>Collab With</p>
-                        <div className="flex items-center gap-1">
-                          <p>{usernameToDataMap[item.collab].login}</p>
-                          <Image
-                            src={usernameToDataMap[item.collab].avatar_url}
-                            alt=""
-                            width={100}
-                            height={100}
-                            className="rounded-full w-4 h-4"
-                          />
-                        </div>
-                      </Link>
-                    )
-                  ))}
+    <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-4 py-4", className)}>
+      {items.map((item) => {
+        const slug = getProjectSlug(item.title);
+        const collabProfile =
+          item.collab && collabMap[item.collab]
+            ? collabMap[item.collab]
+            : null;
+        return (
+          <article key={item.id} className="card-project relative">
+            <Link
+              href={`/projects/${slug}`}
+              aria-label={`View details for ${item.title}`}
+              className="block bg-[var(--bg-elevated)] pixel-border pixel-shadow-md pixel-step hover:-translate-x-[2px] hover:-translate-y-[2px] hover:pixel-shadow-lg hover:outline hover:outline-2 hover:outline-offset-2 hover:outline-[var(--accent-cyan)]"
+            >
+              <div className="relative w-full aspect-video overflow-hidden">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover pixel-image"
+                />
               </div>
 
-              <div className="p-4">
-                <CardTitle>{item.title}</CardTitle>
-                <CardDescription className="line-clamp-5 mt-3">
+              <div className="p-4 border-t-[3px] border-[var(--pixel-border)]">
+                <h3 className="font-pixel text-xs lg:text-sm text-[var(--accent-pink)]">
+                  {item.title.toUpperCase()}
+                </h3>
+                <p className="text-[var(--fg-muted)] leading-relaxed text-xs mt-3 line-clamp-4">
                   {item.description}
-                </CardDescription>
-                {/* tech icons */}
+                </p>
+
                 {item.tech && (
-                  <div className="flex gap-3 my-3">
-                    {item.tech.map((Icon, idx) => (
-                      <Icon
-                        key={idx}
-                        className="text-2xl text-gray-900 dark:text-gray-300"
-                      />
+                  <div className="flex flex-wrap gap-2.5 my-3 items-center">
+                    {item.tech.slice(0, 6).map((Icon, idx) => (
+                      <Icon key={idx} className="text-lg text-[var(--fg)]" />
                     ))}
+                    {item.tech.length > 6 && (
+                      <span className="font-pixel text-[9px] text-[var(--fg-muted)]">
+                        +{item.tech.length - 6}
+                      </span>
+                    )}
                   </div>
                 )}
-                {/* link source code and project */}
-                <div className="flex items-center gap-3 text-gray-900 dark:text-gray-300">
-                  {/* github */}
-                  {item.source === "private" ? (
-                    <button
-                      className="bg-red-600 p-1 rounded-sm hover:cursor-not-allowed text-gray-300"
-                      disabled>
-                      <div className="flex items-center gap-1">
-                        <SiGithub className="text-lg" />
-                        <h1 className="text-xs">Private</h1>
-                      </div>
-                    </button>
-                  ) : (
-                    <Link
-                      href={item.source}
-                      target="_blank"
-                      className="bg-gray-300 dark:bg-gray-900 p-1 rounded-sm hover:cursor-pointer">
-                      <div className="flex items-center gap-1">
-                        <SiGithub className="text-lg" />
-                        <h1 className="text-xs">
-                          {item.title === "API Books"
-                            ? "Documentation"
-                            : "Source"}
-                        </h1>
-                      </div>
-                    </Link>
-                  )}
 
-                  {/* link to web */}
-                  {item.title === "Diary App" ? (
-                    <button
-                      className="bg-red-600 p-1 rounded-sm text-gray-300 hover:cursor-not-allowed"
-                      disabled>
-                      <div className="flex items-center gap-1">
-                        <SiGooglechrome className="text-lg" />
-                        <h1 className="text-xs">Maintenance</h1>
-                      </div>
-                    </button>
-                  ) : (
-                    item.title !== "API Books" && (
-                      <Link
-                        href={item.link}
-                        target="_blank"
-                        className="bg-gray-300 dark:bg-gray-900 p-1 rounded-sm hover:cursor-pointer">
-                        <div className="flex items-center gap-1">
-                          <SiGooglechrome className="text-lg" />
-                          <h1 className="text-xs">Preview</h1>
-                        </div>
-                      </Link>
-                    )
-                  )}
+                <div className="flex items-center justify-between mt-3 pt-3 border-t-[2px] border-[var(--pixel-border)]">
+                  <span className="font-pixel text-[9px] text-[var(--accent-cyan)]">
+                    &gt; VIEW DETAILS
+                  </span>
+                  <div className="flex items-center gap-1.5">
+                    {item.source !== "private" && (
+                      <SiGithub className="text-sm text-[var(--fg-muted)]" />
+                    )}
+                    {item.title !== "Diary App" &&
+                      item.title !== "API Books" && (
+                        <SiGooglechrome className="text-sm text-[var(--fg-muted)]" />
+                      )}
+                  </div>
                 </div>
               </div>
-            </Card>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
+            </Link>
 
-export const Card = ({
-  className,
-  children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) => {
-  return (
-    <div
-      className={cn(
-        "rounded-xl h-full w-full overflow-hidden bg-gray-200 dark:bg-gray-800 relative z-20",
-        className
-      )}>
-      <div className="relative z-50">{children}</div>
+            {item.collab && isPending && (
+              <div className="absolute top-5 right-5 z-10 bg-[var(--bg)] pixel-border pixel-shadow-sm p-1">
+                <IconLoader3 className="animate-spin text-[var(--accent-cyan)] w-4 h-4" />
+              </div>
+            )}
+            {collabProfile && (
+              <a
+                href={collabProfile.html_url}
+                target="_blank"
+                rel="noreferrer"
+                className="absolute top-5 right-5 z-10 text-[10px] bg-[var(--bg)] pixel-border pixel-shadow-sm px-1.5 py-1 flex items-center gap-1.5 text-[var(--fg)] hover:text-[var(--accent-cyan)]"
+              >
+                <span className="font-pixel">COLLAB</span>
+                <div className="flex items-center gap-1">
+                  <span>{collabProfile.login}</span>
+                  <div className="pixel-border pixel-image">
+                    <Image
+                      src={collabProfile.avatar_url}
+                      alt={collabProfile.login}
+                      width={100}
+                      height={100}
+                      className="w-4 h-4 pixel-image block"
+                      unoptimized
+                    />
+                  </div>
+                </div>
+              </a>
+            )}
+          </article>
+        );
+      })}
     </div>
-  );
-};
-export const CardTitle = ({
-  className,
-  children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) => {
-  return (
-    <h4
-      className={cn(
-        "text-gray-900 dark:text-gray-300 font-bold tracking-wide",
-        className
-      )}>
-      {children}
-    </h4>
-  );
-};
-export const CardDescription = ({
-  className,
-  children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) => {
-  return (
-    <p
-      className={cn(
-        "text-gray-900 dark:text-gray-300 leading-relaxed text-xs",
-        className
-      )}>
-      {children}
-    </p>
   );
 };

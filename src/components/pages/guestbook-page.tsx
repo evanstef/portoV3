@@ -22,35 +22,17 @@ export default function GuestbookPage() {
   useGSAP(
     () => {
       const tl = gsap.timeline();
-
-      tl.from(".title-guestbook", {
-        duration: 0.1,
+      const common = {
+        duration: 0.12,
         opacity: 0,
-        filter: "blur(7px)",
-        y: 50,
-        ease: "power2.out",
-      })
-        .from(".text-guestbook", {
-          duration: 0.1,
-          opacity: 0,
-          filter: "blur(7px)",
-          y: 50,
-          ease: "power2.out",
-        })
-        .from(".auth-guestbook", {
-          duration: 0.1,
-          opacity: 0,
-          filter: "blur(7px)",
-          y: 50,
-          ease: "power2.out",
-        })
-        .from(".input-guestbook", {
-          duration: 0.1,
-          opacity: 0,
-          filter: "blur(7px)",
-          y: 50,
-          ease: "power2.out",
-        });
+        filter: "blur(6px)",
+        y: 40,
+        ease: "steps(4)",
+      };
+      tl.from(".title-guestbook", common)
+        .from(".text-guestbook", common)
+        .from(".auth-guestbook", common)
+        .from(".input-guestbook", common);
     },
     { scope: guestbookPage }
   );
@@ -63,7 +45,6 @@ export default function GuestbookPage() {
     await signIn("github", { callbackUrl: "/guestbook" });
   };
 
-  // logic untuk membuat komentar
   const queryClient = useQueryClient();
 
   const createCommentMutation = useMutation({
@@ -73,9 +54,7 @@ export default function GuestbookPage() {
         user_id: user?.id as string,
       }),
     onSuccess: async () => {
-      // reset form
       reset();
-      // refrecth comments list
       await queryClient.invalidateQueries({
         queryKey: ["comments"],
         refetchType: "active",
@@ -101,95 +80,111 @@ export default function GuestbookPage() {
   }
 
   return (
-    <div ref={guestbookPage}>
-      <div className="space-y-4 border-b border-gray-900 dark:border-gray-300 pb-4 mb-4">
-        <h1 className="text-base sm:text-lg lg:text-2xl font-bold title-guestbook">
-          guestbook and leave a message...
+    <div ref={guestbookPage} className="space-y-4">
+      <section className="pb-2">
+        <h1 className="font-pixel title-guestbook text-base sm:text-xl lg:text-2xl text-[var(--accent-blossom)]">
+          &gt; MAIL BOX
         </h1>
-        <p className="text-xs sm:text-sm lg:text-base text-guestbook">
-          Welcome to my digital guestbook! Just like the nostalgic guestbooks of
-          personal websites in the early internet days, this space is yours to
-          leave a message, share feedback, or simply say hello. but sorry you
-          have to login Github first
+        <p className="text-guestbook text-xs sm:text-sm lg:text-base text-[var(--fg-muted)] mt-3 font-mono">
+          &gt; drop a letter in the mailbox.
+          <br />
+          &gt; sign your name with GitHub first.
         </p>
-        <div className="auth-guestbook">
+      </section>
+
+      <div aria-hidden className="pixel-divider" />
+
+      {/* Auth dialog box */}
+      <section className="auth-guestbook">
+        <div className="bg-[var(--bg-elevated)] pixel-border pixel-shadow-md p-4">
+          <div className="flex items-center gap-2 font-pixel text-xs uppercase tracking-wider text-[var(--accent-cyan)] mb-3">
+            <span
+              aria-hidden
+              className="inline-block h-2 w-2 bg-[var(--accent-cyan)]"
+              style={{ animation: "pixel-blink 1s steps(2) infinite" }}
+            />
+            <span>session.status</span>
+          </div>
           {isAuthChecking ? (
-            // Tampilkan loading saat memeriksa status auth
-            <div className="flex items-center gap-2">
-              <IconLoader3 className="animate-spin w-4 h-4 lg:w-6 lg:h-6" />
-              <p className="text-xs sm:text-sm lg:text-base">
-                Checking login status...
-              </p>
+            <div className="flex items-center gap-2 text-[var(--fg-muted)]">
+              <IconLoader3 className="animate-spin w-4 h-4 lg:w-5 lg:h-5" />
+              <p className="text-xs sm:text-sm">Checking login status...</p>
             </div>
           ) : user ? (
-            <div className="text-xs sm:text-sm lg:text-base flex items-center gap-2">
-              <p>Hello,</p>
-              <div className="font-bold">{user.name}👋!!</div>
+            <div className="flex items-center gap-2">
+              <p className="font-pixel text-sm text-[var(--fg)]">HELLO,</p>
+              <p className="font-pixel text-sm font-bold text-[var(--accent-pink)]">
+                {user.name?.toUpperCase()} {" "}
+                <span className="text-[var(--accent-lime)]">👋</span>
+              </p>
             </div>
           ) : (
             <button
               type="button"
               onClick={handleSignIn}
               disabled={isLoading}
-              className={`flex items-center gap-2 border border-gray-900 dark:border-gray-300 p-2 hover:bg-gray-900 dark:hover:bg-gray-300 duration-300 hover:text-gray-300 dark:hover:text-gray-900 ease-in-out rounded-md ${
-                isLoading
-                  ? "opacity-80 cursor-not-allowed"
-                  : "hover:cursor-pointer"
-              }`}>
-              <div className="text-xs sm:text-sm lg:text-base">
-                Sign In With Github
-              </div>
-              <SiGithub className="text-base lg:text-xl" />
+              className={`font-pixel inline-flex items-center gap-2 bg-[var(--accent-pink)] text-[var(--bg)] pixel-border pixel-shadow-sm pixel-step px-3 py-2 text-xs sm:text-sm hover:-translate-x-[2px] hover:-translate-y-[2px] hover:pixel-shadow-md active:translate-x-0 active:translate-y-0 active:shadow-none ${
+                isLoading ? "opacity-70 cursor-not-allowed" : ""
+              }`}
+            >
+              <SiGithub className="text-base lg:text-lg" />
+              <span>SIGN IN WITH GITHUB</span>
             </button>
           )}
         </div>
-      </div>
+      </section>
 
-      {/* input message */}
+      {/* Message input */}
       {user && (
-        <div className="flex items-start gap-2 border-b border-gray-900 dark:border-gray-300 pb-4 mb-4 input-guestbook">
-          <p className="text-xs sm:text-sm lg:text-base whitespace-nowrap mt-2">
-            Message :
-          </p>
+        <section className="input-guestbook">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="w-full flex items-start gap-2">
-            <div className="flex-1 min-w-0">
-              <input
-                {...register("comment")}
-                type="text"
-                className="border border-gray-900 dark:border-gray-300 rounded-lg p-2 text-xs sm:text-sm w-full lg:text-base focus:outline-none"
-                placeholder="Leave a message for Evan..."
-                autoComplete="off"
-              />
-              {errors.comment && (
-                <p className="text-red-500 text-xs sm:text-sm lg:text-base">
-                  {errors.comment.message}
-                </p>
-              )}
+            className="bg-[var(--bg-elevated)] pixel-border pixel-shadow-md p-4 space-y-3"
+          >
+            <label className="font-pixel text-xs uppercase tracking-wider text-[var(--accent-lime)] flex items-center gap-2">
+              <span>&gt;</span>
+              <span>new_message.input</span>
+            </label>
+            <div className="flex flex-col sm:flex-row gap-3 items-start">
+              <div className="flex-1 w-full min-w-0">
+                <input
+                  {...register("comment")}
+                  type="text"
+                  className="w-full bg-[var(--bg-sunken)] pixel-border px-3 py-2 text-xs sm:text-sm text-[var(--fg)] placeholder:text-[var(--fg-muted)] focus:outline-none focus:border-[var(--accent-cyan)]"
+                  placeholder="type your message..."
+                  autoComplete="off"
+                />
+                {errors.comment && (
+                  <p className="text-[var(--destructive)] text-[10px] sm:text-xs mt-1 font-pixel">
+                    &gt; {errors.comment.message}
+                  </p>
+                )}
+              </div>
+              <button
+                type="submit"
+                disabled={createCommentMutation.isPending}
+                className={`font-pixel inline-flex items-center gap-2 bg-[var(--accent-cyan)] text-[var(--bg)] pixel-border pixel-shadow-sm pixel-step px-3 py-2 text-xs sm:text-sm hover:-translate-x-[2px] hover:-translate-y-[2px] hover:pixel-shadow-md active:translate-x-0 active:translate-y-0 active:shadow-none ${
+                  createCommentMutation.isPending
+                    ? "opacity-70 cursor-not-allowed"
+                    : ""
+                }`}
+              >
+                {createCommentMutation.isPending ? (
+                  <IconLoader3 className="animate-spin w-4 h-4 lg:w-5 lg:h-5" />
+                ) : (
+                  <>
+                    <span>SEND</span>
+                    <IconSend2 className="w-4 h-4 lg:w-5 lg:h-5" />
+                  </>
+                )}
+              </button>
             </div>
-            <button
-              type="submit"
-              disabled={createCommentMutation.isPending}
-              className={`flex items-center gap-2 bg-gray-900 dark:bg-gray-300 p-2 rounded-md ${
-                createCommentMutation.isPending
-                  ? "hover:cursor-not-allowed"
-                  : "hover:cursor-pointer"
-              } text-gray-300 dark:text-gray-900 whitespace-nowrap`}>
-              {createCommentMutation.isPending ? (
-                <IconLoader3 className="animate-spin w-4 h-4 lg:w-6 lg:h-6" />
-              ) : (
-                <>
-                  <p className="text-xs sm:text-sm lg:text-base">Send</p>
-                  <IconSend2 className="w-4 h-4 lg:w-6 lg:h-6" />
-                </>
-              )}
-            </button>
           </form>
-        </div>
+        </section>
       )}
 
-      {/* list of message */}
+      <div aria-hidden className="pixel-divider" />
+
       <CommentList />
     </div>
   );

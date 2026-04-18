@@ -2,7 +2,7 @@ import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persist
 import { QueryClient } from "@tanstack/react-query";
 import { persistQueryClient } from "@tanstack/react-query-persist-client";
 
-export function setupQueryClient() {
+function makeQueryClient(): QueryClient {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -11,7 +11,6 @@ export function setupQueryClient() {
     },
   });
 
-  // Hanya jalankan persistensi di browser, bukan di server
   if (typeof window !== "undefined") {
     const persister = createSyncStoragePersister({
       storage: window.localStorage,
@@ -26,4 +25,16 @@ export function setupQueryClient() {
   }
 
   return queryClient;
+}
+
+let browserQueryClient: QueryClient | undefined;
+
+export function getQueryClient(): QueryClient {
+  if (typeof window === "undefined") {
+    return makeQueryClient();
+  }
+  if (!browserQueryClient) {
+    browserQueryClient = makeQueryClient();
+  }
+  return browserQueryClient;
 }

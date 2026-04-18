@@ -1,31 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { setupQueryClient } from "@/lib/query-client";
+import { getQueryClient } from "@/lib/query-client";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
-import { useEffect, useState } from "react";
-import LoadingScene from "./loading-scene";
+import { useState } from "react";
 
 type Props = {
   children: React.ReactNode;
 };
 
 export default function ContainerLayout({ children }: Props) {
-  const [queryClient, setQueryClient] = useState<any>(null);
-
-  useEffect(() => {
-    setQueryClient(setupQueryClient());
-  }, []);
-
-  if (!queryClient)
-    return (
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <LoadingScene />
-      </ThemeProvider>
-    );
+  const [queryClient] = useState(() => getQueryClient());
 
   return (
     <SessionProvider>

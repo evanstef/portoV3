@@ -1,330 +1,281 @@
 "use client";
 
-import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import {
-  SiJavascript,
-  SiTypescript,
-  SiNextdotjs,
-  SiNestjs,
-  SiLaravel,
-  SiExpress,
-  SiPhp,
-  SiMysql,
-  SiMongodb,
-  SiNodedotjs,
-  SiPrisma,
-} from "react-icons/si";
-import { LinkPreview } from "../ui/link-preview";
-import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
+import { useRef } from "react";
+import {
+  SiExpress,
+  SiJavascript,
+  SiLaravel,
+  SiMongodb,
+  SiMysql,
+  SiNestjs,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPhp,
+  SiPrisma,
+  SiTypescript,
+} from "react-icons/si";
+
+type Skill = {
+  name: string;
+  url: string;
+  Icon: React.ComponentType<{ className?: string }>;
+  tint: string;
+};
+
+const skills: Skill[] = [
+  { name: "JS", url: "https://www.javascript.com/", Icon: SiJavascript, tint: "var(--accent-wheat)" },
+  { name: "TS", url: "https://www.typescriptlang.org/", Icon: SiTypescript, tint: "var(--accent-water)" },
+  { name: "PHP", url: "https://www.php.net/", Icon: SiPhp, tint: "var(--accent-blossom)" },
+  { name: "NEXT", url: "https://nextjs.org/", Icon: SiNextdotjs, tint: "var(--fg)" },
+  { name: "NODE", url: "https://nodejs.org/en", Icon: SiNodedotjs, tint: "var(--accent-leaf)" },
+  { name: "NEST", url: "https://nestjs.com/", Icon: SiNestjs, tint: "var(--accent-blossom)" },
+  { name: "EXP", url: "https://expressjs.com/", Icon: SiExpress, tint: "var(--fg-muted)" },
+  { name: "LARA", url: "https://laravel.com/", Icon: SiLaravel, tint: "var(--accent-lantern)" },
+  { name: "PRIS", url: "https://www.prisma.io/", Icon: SiPrisma, tint: "var(--accent-leaf)" },
+  { name: "MGDB", url: "https://www.mongodb.com/", Icon: SiMongodb, tint: "var(--accent-leaf)" },
+  { name: "SQL", url: "https://www.mysql.com/", Icon: SiMysql, tint: "var(--accent-wheat)" },
+];
+
+type Experience = {
+  company: string;
+  role: string;
+  period: string;
+  season: "spring" | "summer" | "fall" | "winter";
+};
+
+const experiences: Experience[] = [
+  { company: "Pulau Intan Lestari", role: "Full Stack Developer", period: "Nov 2025 – present", season: "winter" },
+  { company: "Linkupcareer.id", role: "Frontend Developer", period: "Jul 2025 – Dec 2025", season: "summer" },
+  { company: "Puskesmas PangkalBalam", role: "Software Developer", period: "Apr 2025 – Aug 2025", season: "spring" },
+  { company: "PT Cadadusa Acintya Dakara", role: "Front End Web Developer Intern", period: "Aug 2024 – Dec 2024", season: "fall" },
+  { company: "BB Diesel", role: "Administrator Staff", period: "Mei 2021 – Jul 2023", season: "summer" },
+];
+
+const SEASON_ICON: Record<Experience["season"], string> = {
+  spring: "❀",
+  summer: "☀",
+  fall: "♤",
+  winter: "❄",
+};
+
+const SEASON_COLOR: Record<Experience["season"], string> = {
+  spring: "var(--accent-blossom)",
+  summer: "var(--accent-wheat)",
+  fall: "var(--accent-lantern)",
+  winter: "var(--accent-water)",
+};
 
 export default function HomePage() {
-  const [hovered, setHovered] = useState(false);
-  const containerAbout = useRef(null);
+  const containerRef = useRef(null);
 
   useGSAP(
     () => {
       const tl = gsap.timeline();
-
-      tl.from(".nama-evan", {
-        duration: 0.1,
+      const common = {
+        duration: 0.15,
         opacity: 0,
-        filter: "blur(7px)",
-        y: 50,
-        ease: "power2.out",
-      })
-        .from(".headline-text", {
-          duration: 0.1,
-          opacity: 0,
-          filter: "blur(7px)",
-          y: 50,
-          ease: "power2.out",
-        })
-        .from(".gambar-meme", {
-          duration: 0.1,
-          opacity: 0,
-          filter: "blur(7px)",
-          x: 50,
-          ease: "power2.out",
-        })
-        .from(".little-peace", {
-          duration: 0.1,
-          opacity: 0,
-          filter: "blur(7px)",
-          y: 50,
-          ease: "power2.out",
-        })
-        .from(".desc-litte-peace", {
-          duration: 0.1,
-          opacity: 0,
-          filter: "blur(7px)",
-          y: 50,
-          ease: "power2.out",
-        })
-        .from(".skill-set div", {
-          duration: 0.1,
-          opacity: 0,
-          filter: "blur(7px)",
-          y: 30,
-          ease: "power2.out",
-          stagger: 0.05,
-        })
-        .from(".experience-title", {
-          duration: 0.1,
-          opacity: 0,
-          filter: "blur(7px)",
-          y: 50,
-          ease: "power2.out",
-        })
-        .from(".experience-set div", {
-          duration: 0.1,
-          opacity: 0,
-          filter: "blur(7px)",
-          y: 50,
-          ease: "power2.out",
-          stagger: 0.05,
-        });
+        filter: "blur(6px)",
+        y: 40,
+        ease: "steps(4)",
+      };
+      tl.from(".farm-hero", common)
+        .from(".farm-intro", common)
+        .from(".about-card", common)
+        .from(".inv-title", common)
+        .from(".inv-slot", { ...common, stagger: 0.04 })
+        .from(".log-title", common)
+        .from(".log-entry", { ...common, stagger: 0.05 });
     },
-    { scope: containerAbout }
+    { scope: containerRef }
   );
 
   return (
-    <div ref={containerAbout} className="space-y-4 xl:space-y-6">
-      {/* Hero section  */}
-      <div className="flex justify-between items-center border-b border-gray-900 dark:border-gray-300 pb-4 gap-10 sm:gap-0">
-        {/* Kata kata manis */}
-        <div>
-          <h1 className="text-xl sm:text-2xl lg:text-4xl font-bold nama-evan">
-            Hello, I&apos;m Evan
-          </h1>
-          <p className="text-xs sm:text-sm lg:text-base headline-text">
-            just ordinary people love how to code.
-          </p>
-        </div>
+    <div ref={containerRef} className="space-y-6">
+      {/* ============= Hero: wooden bulletin board ============= */}
+      <section className="farm-hero relative bg-[var(--bg-elevated)] pixel-border pixel-shadow-md p-5 sm:p-6 overflow-hidden">
+        {/* Decorative nail pins */}
+        <span
+          aria-hidden
+          className="absolute top-2 left-2 h-2 w-2 bg-[var(--wood-dark)]"
+        />
+        <span
+          aria-hidden
+          className="absolute top-2 right-2 h-2 w-2 bg-[var(--wood-dark)]"
+        />
+        <span
+          aria-hidden
+          className="absolute bottom-2 left-2 h-2 w-2 bg-[var(--wood-dark)]"
+        />
+        <span
+          aria-hidden
+          className="absolute bottom-2 right-2 h-2 w-2 bg-[var(--wood-dark)]"
+        />
 
-        {/* gambar */}
-        <div className="gambar-meme">
-          <div
-            className={cn(
-              "group cursor-pointer overflow-hidden relative rounded-md mx-auto w-28 h-28 sm:w-32 sm:h-32 xl:w-36 xl:h-36 -rotate-6 flex flex-col justify-end p-4",
-              "bg-[url('/467lxb.jpg')] bg-cover bg-center",
-              // Preload hover image by setting it in a pseudo-element
-              "before:bg-[url(https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmx4bWVweDRmbzRobWx0dnRqMHNxbW1ma3Z5b2ljOHNzcXR4YWM2MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3Owa0TWYqHi5RZYGql/giphy.gif)] before:fixed before:inset-0 before:opacity-0 before:z-[-1]",
-              "hover:bg-[url(https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmx4bWVweDRmbzRobWx0dnRqMHNxbW1ma3Z5b2ljOHNzcXR4YWM2MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3Owa0TWYqHi5RZYGql/giphy.gif)]",
-              "hover:after:content-[''] hover:after:absolute hover:after:inset-0 hover:after:bg-black hover:after:opacity-50",
-              "transition-all duration-500",
-              "text-gray-300 hover:text-gray-900"
-            )}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-          >
-            <div className="text relative z-50">
-              <h1
-                className={`font-bold text-[8px] sm:text-[10px] lg:text-xs relative text-center ${
-                  hovered ? "bg-gray-300" : "bg-gray-900"
-                } p-1 rounded-xl`}
-              >
-                {hovered ? "Im Hiding!!" : "Please Hover!!"}
-              </h1>
-            </div>
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <p className="font-pixel text-[9px] sm:text-[10px] text-[var(--accent-lantern)] mb-3">
+              &gt; STARDEW VALLEY &middot; DAY 1
+            </p>
+            <h1 className="font-pixel text-base sm:text-xl lg:text-2xl text-[var(--fg)] leading-tight">
+              WELCOME TO
+              <br />
+              <span className="text-[var(--accent-leaf)]">EVAN&apos;S FARM</span>
+            </h1>
+            <p className="farm-intro text-xs sm:text-sm lg:text-base text-[var(--fg-muted)] mt-4 font-mono">
+              &gt; a full-stack developer planting code
+              <br />
+              &gt; and harvesting web apps since 2024.
+            </p>
           </div>
-        </div>
-      </div>
 
-      {/* About Me */}
-      <div className="border-b border-gray-900 dark:border-gray-300 pb-4">
-        <div className="flex items-center gap-2 little-peace">
-          <h1 className="text-base sm:text-lg lg:text-2xl font-bold">
-            a little peace of heaven
-          </h1>
-          <Image
-            src={
-              "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHRzYTAwcTd1OXdycGJzaGUxbnZucDM0MTd2d3FmY2Rmc3UwNGQ5aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/L4epvaYdygiHV1Z2ET/giphy.gif"
-            }
-            alt="adwa"
-            width={150}
-            height={150}
-            className="rounded-full w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16"
-          />
+          {/* Tiny pixel farm house */}
+          <svg
+            width="72"
+            height="72"
+            viewBox="0 0 24 24"
+            className="shrink-0 hidden sm:block"
+            style={{ shapeRendering: "crispEdges" }}
+            aria-hidden
+          >
+            {/* Roof */}
+            <g fill="var(--destructive)">
+              <rect x="11" y="3" width="2" height="1" />
+              <rect x="10" y="4" width="4" height="1" />
+              <rect x="9" y="5" width="6" height="1" />
+              <rect x="8" y="6" width="8" height="1" />
+              <rect x="7" y="7" width="10" height="1" />
+              <rect x="6" y="8" width="12" height="1" />
+            </g>
+            {/* Walls */}
+            <g fill="var(--wood-light)">
+              <rect x="7" y="9" width="10" height="10" />
+            </g>
+            {/* Door */}
+            <g fill="var(--wood-dark)">
+              <rect x="10" y="13" width="3" height="6" />
+              <rect x="12" y="16" width="1" height="1" />
+            </g>
+            {/* Window */}
+            <g fill="var(--accent-water)">
+              <rect x="14" y="11" width="2" height="2" />
+            </g>
+            {/* Grass */}
+            <g fill="var(--accent-leaf)">
+              <rect x="4" y="19" width="16" height="1" />
+              <rect x="3" y="20" width="18" height="1" />
+            </g>
+          </svg>
         </div>
-        <p className="text-xs sm:text-sm lg:text-base desc-litte-peace">
+      </section>
+
+      {/* ============= Inventory (Skills) ============= */}
+      <section className="space-y-3">
+        <div className="inv-title flex items-center justify-between">
+          <h2 className="font-pixel text-sm sm:text-base lg:text-xl text-[var(--accent-wheat)]">
+            &gt; INVENTORY
+          </h2>
+          <span className="font-pixel text-[9px] sm:text-[10px] text-[var(--fg-muted)]">
+            {skills.length}/11 SLOTS
+          </span>
+        </div>
+        <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-11 gap-2">
+          {skills.map(({ name, url, Icon, tint }) => (
+            <a
+              key={name}
+              href={url}
+              target="_blank"
+              rel="noreferrer"
+              title={name}
+              className={cn(
+                "inv-slot group relative flex flex-col items-center justify-center aspect-square",
+                "bg-[var(--bg-elevated)] pixel-border pixel-shadow-sm pixel-step",
+                "hover:-translate-x-[2px] hover:-translate-y-[2px] hover:pixel-shadow-md"
+              )}
+            >
+              <Icon
+                className="text-xl sm:text-2xl transition-colors"
+              />
+              <span className="font-pixel text-[7px] sm:text-[8px] text-[var(--fg-muted)] mt-1 leading-none">
+                {name}
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <div aria-hidden className="pixel-divider" />
+
+      {/* ============= About: character profile ============= */}
+      <section className="about-card bg-[var(--bg-elevated)] pixel-border pixel-shadow-sm p-5">
+        <h2 className="font-pixel text-sm sm:text-base lg:text-xl text-[var(--accent-water)] mb-4">
+          &gt; PROFILE.TXT
+        </h2>
+        <p className="font-mono text-xs sm:text-sm lg:text-base text-[var(--fg)] leading-relaxed">
           I enjoy showcasing my skills in a more visual and engaging way. My
           journey in web development has allowed me to create responsive and
-          modern designs that prioritize both creativity and user experience. I
-          constantly push my limits to craft intuitive and aesthetically
-          pleasing interfaces.On the back-end, I specialize in JavaScript and
-          PHP, working with frameworks like NextJS, ExpressJS, NestJS, NodeJS,
-          and Laravel.
+          modern designs that prioritize both creativity and user experience.
+          I constantly push my limits to craft intuitive and aesthetically
+          pleasing interfaces. On the back-end, I specialize in JavaScript
+          and PHP, working with frameworks like NextJS, ExpressJS, NestJS,
+          NodeJS, and Laravel.
         </p>
-      </div>
+      </section>
 
-      {/* Skill Framework and programming language */}
-      <div className="space-y-4 border-b border-gray-900 dark:border-gray-300 pb-4 ">
-        <div className="grid grid-cols-6 gap-x-8 gap-y-2 sm:grid-cols-8 md:grid-cols-10 sm:gap-x-12 md:gap-x-10 lg:grid-cols-11 xl:gap-10 skill-set">
-          {/* Javascript */}
-          <div>
-            <LinkPreview url="https://www.javascript.com/">
-              <SiJavascript className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-yellow-400 dark:hover:text-yellow-400 hover:cursor-pointer" />
-            </LinkPreview>
-          </div>
+      <div aria-hidden className="pixel-divider" />
 
-          {/* TypeScript */}
-          <div>
-            <LinkPreview url="https://www.typescriptlang.org/">
-              <SiTypescript className="text-2xl sm:text-3xl duration-300 ease-in-out dark:hover:text-blue-600 text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-blue-600 hover:cursor-pointer" />
-            </LinkPreview>
-          </div>
-
-          {/* php */}
-          <div>
-            <LinkPreview url="https://www.php.net/">
-              <SiPhp className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-purple-700 dark:hover:text-purple-700 hover:cursor-pointer" />
-            </LinkPreview>
-          </div>
-
-          {/* Next JS */}
-          <div>
-            <LinkPreview url="https://nextjs.org/">
-              <SiNextdotjs className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:cursor-pointer" />
-            </LinkPreview>
-          </div>
-
-          {/* node js */}
-          <div>
-            <LinkPreview url="https://nodejs.org/en">
-              <SiNodedotjs className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-green-500 dark:hover:text-green-500 hover:cursor-pointer" />
-            </LinkPreview>
-          </div>
-
-          {/* nest js */}
-          <div>
-            <LinkPreview url="https://nestjs.com/">
-              <SiNestjs className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:hover:text-red-500 dark:text-gray-300 hover:scale-150 hover:text-red-500 hover:cursor-pointer" />
-            </LinkPreview>
-          </div>
-
-          {/* express js */}
-          <div>
-            <LinkPreview url="https://expressjs.com/">
-              <SiExpress className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:cursor-pointer" />
-            </LinkPreview>
-          </div>
-
-          {/* laravel */}
-          <div>
-            <LinkPreview url="https://laravel.com/">
-              <SiLaravel className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-red-500 dark:hover:text-red-500 hover:cursor-pointer" />
-            </LinkPreview>
-          </div>
-
-          {/* prisma */}
-          <div>
-            <LinkPreview url="https://www.prisma.io/">
-              <SiPrisma className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-green-400 dark:hover:text-green-400 hover:cursor-pointer" />
-            </LinkPreview>
-          </div>
-
-          {/* mongodb */}
-          <div>
-            <LinkPreview url="https://www.mongodb.com/">
-              <SiMongodb className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-green-500 dark:hover:text-green-500 hover:cursor-pointer" />
-            </LinkPreview>
-          </div>
-
-          {/* mysql */}
-          <div>
-            <LinkPreview url="https://www.mysql.com/">
-              <SiMysql className="text-2xl sm:text-3xl duration-300 ease-in-out text-gray-900 dark:text-gray-300 hover:scale-150 hover:text-yellow-500 dark:hover:text-yellow-500 hover:cursor-pointer" />
-            </LinkPreview>
-          </div>
+      {/* ============= Farm History (Experience) ============= */}
+      <section className="space-y-3">
+        <div className="log-title flex items-center gap-2">
+          <h2 className="font-pixel text-sm sm:text-base lg:text-xl text-[var(--accent-leaf)]">
+            &gt; FARM.LOG
+          </h2>
+          <span className="font-pixel text-[9px] sm:text-[10px] text-[var(--fg-muted)]">
+            [{experiences.length} ENTRIES]
+          </span>
         </div>
-      </div>
 
-      {/* Exprerience */}
-      <div className="space-y-4 border-b border-gray-900 dark:border-gray-300 pb-4">
-        <h1 className="text-base sm:text-lg lg:text-2xl font-bold experience-title">
-          Experience
-        </h1>
+        <div className="space-y-3">
+          {experiences.map((exp) => (
+            <article
+              key={exp.company}
+              className="log-entry relative bg-[var(--bg-elevated)] pixel-border pixel-shadow-sm p-4"
+            >
+              {/* Parchment corner fold */}
+              <span
+                aria-hidden
+                className="absolute top-0 right-0 w-0 h-0 border-solid border-t-[12px] border-t-[var(--bg-sunken)] border-l-[12px] border-l-transparent"
+              />
 
-        <div className="experience-set space-y-4">
-          {/* Pulau Intan Lestari*/}
-          <div>
-            <div className="flex justify-between items-center">
-              <h1 className="text-sm line-clamp-1 lg:text-lg font-bold">
-                Pulau Intan Lestari
-              </h1>
-              <p className="text-[10px] sm:text-xs lg:text-base">
-                Nov 2025 - present
-              </p>
-            </div>
-            <p className="text-xs sm:text-sm lg:text-base">
-              Full Stack Developer
-            </p>
-          </div>
+              <div className="flex items-start gap-3">
+                <span
+                  className="font-pixel text-base sm:text-lg shrink-0 w-6 text-center"
+                  style={{ color: SEASON_COLOR[exp.season] }}
+                  aria-label={`${exp.season} season`}
+                >
+                  {SEASON_ICON[exp.season]}
+                </span>
 
-          {/* Linkupcareer.id */}
-          <div>
-            <div className="flex justify-between items-center">
-              <h1 className="text-sm line-clamp-1 lg:text-lg font-bold">
-                Linkupcareer.id
-              </h1>
-              <p className="text-[10px] sm:text-xs lg:text-base">
-                Jul 2025 - present
-              </p>
-            </div>
-            <p className="text-xs sm:text-sm lg:text-base">
-              Frontend Developer
-            </p>
-          </div>
-
-          {/* Puskesmas PangkalBalam */}
-          <div>
-            <div className="flex justify-between items-center">
-              <h1 className="text-sm line-clamp-1 lg:text-lg font-bold">
-                Puskesmas PangkalBalam
-              </h1>
-              <p className="text-[10px] sm:text-xs lg:text-base">
-                Apr 2025 - Aug 2025
-              </p>
-            </div>
-            <p className="text-xs sm:text-sm lg:text-base">
-              Software Developer
-            </p>
-          </div>
-
-          {/* PT CADADUSA ACINTYA DAKARA */}
-          <div>
-            <div className="flex justify-between items-center">
-              <h1 className="text-sm line-clamp-1 lg:text-lg font-bold">
-                PT Cadadusa Acintya Dakara
-              </h1>
-              <p className="text-[10px] sm:text-xs lg:text-base">
-                Aug 2024 - Dec 2024
-              </p>
-            </div>
-            <p className="text-xs sm:text-sm lg:text-base">
-              Front End Web Developer Intern
-            </p>
-          </div>
-
-          {/* BB Diesel */}
-          <div>
-            <div className="flex justify-between items-center">
-              <h1 className="text-sm line-clamp-1 lg:text-lg font-bold">
-                BB Diesel
-              </h1>
-              <p className="text-[10px] sm:text-xs lg:text-base">
-                Mei 2021 - Jul 2023
-              </p>
-            </div>
-            <p className="text-xs sm:text-sm lg:text-base">
-              Administator Staff
-            </p>
-          </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <h3 className="font-mono text-sm lg:text-base font-bold text-[var(--fg)]">
+                      {exp.company}
+                    </h3>
+                    <span className="font-pixel text-[8px] sm:text-[9px] lg:text-[10px] text-[var(--fg-muted)] whitespace-nowrap">
+                      {exp.period}
+                    </span>
+                  </div>
+                  <p className="font-mono text-xs sm:text-sm text-[var(--fg-muted)] mt-1">
+                    {exp.role}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
-      </div>
+      </section>
     </div>
   );
 }

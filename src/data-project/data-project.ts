@@ -1,33 +1,68 @@
-import sembilan from "../../public/project-sembilan.png";
+import {
+  SiAlpinedotjs,
+  SiAxios,
+  SiDaisyui,
+  SiFramer,
+  SiJavascript,
+  SiLaravel,
+  SiMysql,
+  SiNestjs,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPhp,
+  SiPrisma,
+  SiReactquery,
+  SiShadcnui,
+  SiSupabase,
+  SiTailwindcss,
+  SiTypescript,
+  SiWebgl,
+} from "react-icons/si";
+import type { IconType } from "react-icons/lib";
+import type { StaticImageData } from "next/image";
+import bangkahire from "../../public/bangka-hire.png";
 import empat from "../../public/project-empat.png";
 import enam from "../../public/project-enam.png";
-import tujuh from "../../public/project-tujuh.png";
+import sembilan from "../../public/project-sembilan.png";
 import sepuluh from "../../public/project-sepuluh.png";
+import tujuh from "../../public/project-tujuh.png";
 import netflix from "../../public/Screenshot 2024-06-12 085200.png";
 import spill from "../../public/spill-post.png";
-import bangkahire from "../../public/bangka-hire.png";
-import {
-  SiFramer,
-  SiNextdotjs,
-  SiTailwindcss,
-  SiWebgl,
-  SiPrisma,
-  SiNodedotjs,
-  SiNestjs,
-  SiMysql,
-  SiTypescript,
-  SiShadcnui,
-  SiAxios,
-  SiSupabase,
-  SiDaisyui,
-  SiLaravel,
-  SiAlpinedotjs,
-  SiJavascript,
-  SiPhp,
-  SiReactquery,
-} from "react-icons/si";
 
-export const data = [
+export type TechDetail = {
+  name: string;
+  role: "frontend" | "backend" | "database" | "deploy" | "design" | "state" | "other";
+  Icon: IconType;
+};
+
+export type Project = {
+  id: number;
+  title: string;
+  image: StaticImageData;
+  description: string;
+  link: string;
+  source: string;
+  tech: IconType[];
+  collab?: string;
+  longDescription?: string;
+  features?: string[];
+  techDetail?: TechDetail[];
+  gallery?: (StaticImageData | string)[];
+};
+
+export function getProjectSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
+export function getProjectBySlug(slug: string): Project | undefined {
+  return data.find((p) => getProjectSlug(p.title) === slug);
+}
+
+export const data: Project[] = [
   {
     id: 11,
     title: "Bangka Hire",
